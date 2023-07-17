@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<JUCERPROJECT id="nOvAUM" name="viator-rust" projectType="audioplug" useAppConfig="0"
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Viator DSP"
+              pluginName="Rust">
+  <MAINGROUP id="reivZA" name="viator-rust">
+    <GROUP id="{590D4FF8-B1D5-7AA2-AD3F-D495526EE06F}" name="Source">
+      <GROUP id="{8D6B5CF4-A69F-41FF-D19B-67CB34E5D162}" name="assets">
+        <GROUP id="{31206C9A-67D2-6958-F558-1EE330BBDC69}" name="decor">
+          <FILE id="bQuc4h" name="decor_grid.png" compile="0" resource="1" file="Source/assets/decor/decor_grid.png"/>
+          <FILE id="voDbyo" name="screw.png" compile="0" resource="1" file="Source/assets/decor/screw.png"/>
+        </GROUP>
+        <GROUP id="{5EE82C4E-72E4-038A-FF88-860F9ADE23FE}" name="faders">
+          <FILE id="HPxfNd" name="Ver_flat_slider.png" compile="0" resource="1"
+                file="Source/assets/faders/Ver_flat_slider.png"/>
+          <FILE id="fg5ykF" name="Ver_slider.png" compile="0" resource="1" file="Source/assets/faders/Ver_slider.png"/>
+        </GROUP>
+        <GROUP id="{CBB256A9-983B-6A8E-537C-4E78E3CDBF10}" name="knobs">
+          <FILE id="dvucgX" name="Knob_01.png" compile="0" resource="1" file="Source/assets/knobs/Knob_01.png"/>
+          <FILE id="y9cQRw" name="Knob_02.png" compile="0" resource="1" file="Source/assets/knobs/Knob_02.png"/>
+          <FILE id="XxInBW" name="Knob_03.png" compile="0" resource="1" file="Source/assets/knobs/Knob_03.png"/>
+          <FILE id="THDigy" name="Knob_04.png" compile="0" resource="1" file="Source/assets/knobs/Knob_04.png"/>
+          <FILE id="NmbHWc" name="Knob_05.png" compile="0" resource="1" file="Source/assets/knobs/Knob_05.png"/>
+          <FILE id="hn9j9k" name="Knob_06.png" compile="0" resource="1" file="Source/assets/knobs/Knob_06.png"/>
+          <FILE id="Pfgo2Y" name="Knob_07.png" compile="0" resource="1" file="Source/assets/knobs/Knob_07.png"/>
+          <FILE id="acFhcN" name="Knob_08.png" compile="0" resource="1" file="Source/assets/knobs/Knob_08.png"/>
+          <FILE id="eU4kqm" name="Knob_09.png" compile="0" resource="1" file="Source/assets/knobs/Knob_09.png"/>
+          <FILE id="Yywj7Z" name="Knob_10.png" compile="0" resource="1" file="Source/assets/knobs/Knob_10.png"/>
+        </GROUP>
+        <GROUP id="{23C05432-CEF1-6944-B108-96D18F1F5ECF}" name="vu-meter">
+          <FILE id="bt96cc" name="back_vu-meter_decore5.png" compile="0" resource="1"
+                file="Source/assets/vu-meter/back_vu-meter_decore5.png"/>
+          <FILE id="mqwxYU" name="scale_vu-meter.png" compile="0" resource="1"
+                file="Source/assets/vu-meter/scale_vu-meter.png"/>
+          <FILE id="u0zEvq" name="scale_vu-meterno_name.png" compile="0" resource="1"
+                file="Source/assets/vu-meter/scale_vu-meterno_name.png"/>
+          <FILE id="h2ivk7" name="vu_meter.png" compile="0" resource="1" file="Source/assets/vu-meter/vu_meter.png"/>
+        </GROUP>
+        <FILE id="MWLNHj" name="back_a.png" compile="0" resource="1" file="Source/assets/back_a.png"/>
+        <FILE id="iGFg2c" name="back_d.png" compile="0" resource="1" file="Source/assets/back_d.png"/>
+        <FILE id="revNKe" name="but_small_rec_off.png" compile="0" resource="1"
+              file="Source/assets/but_small_rec_off.png"/>
+        <FILE id="cNpdPo" name="but_small_rec_on.png" compile="0" resource="1"
+              file="Source/assets/but_small_rec_on.png"/>
+        <FILE id="lfRRTL" name="landon.png" compile="0" resource="1" file="Source/assets/landon.png"/>
+        <FILE id="bjYFZ0" name="LED_meter.png" compile="0" resource="1" file="Source/assets/LED_meter.png"/>
+        <FILE id="Lhcupp" name="led_off.png" compile="0" resource="1" file="Source/assets/led_off.png"/>
+        <FILE id="oUA050" name="led_on.png" compile="0" resource="1" file="Source/assets/led_on.png"/>
+        <FILE id="IkCYXc" name="pad_off.png" compile="0" resource="1" file="Source/assets/pad_off.png"/>
+        <FILE id="YigKSY" name="pad_on.png" compile="0" resource="1" file="Source/assets/pad_on.png"/>
+        <FILE id="pTHizc" name="screen.png" compile="0" resource="1" file="Source/assets/screen.png"/>
+      </GROUP>
+      <FILE id="E452Mn" name="PluginProcessor.cpp" compile="1" resource="0"
+            file="Source/PluginProcessor.cpp"/>
+      <FILE id="M2dMIb" name="PluginProcessor.h" compile="0" resource="0"
+            file="Source/PluginProcessor.h"/>
+      <FILE id="omI31m" name="PluginEditor.cpp" compile="1" resource="0"
+            file="Source/PluginEditor.cpp"/>
+      <FILE id="Y2mnqo" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
+    </GROUP>
+  </MAINGROUP>
+  <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
+  <EXPORTFORMATS>
+    <XCODE_MAC targetFolder="Builds/MacOSX">
+      <CONFIGURATIONS>
+        <CONFIGURATION isDebug="1" name="Debug" targetName="viator-rust"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="viator-rust"/>
+      </CONFIGURATIONS>
+      <MODULEPATHS>
+        <MODULEPATH id="juce_audio_basics" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_devices" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_formats" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_plugin_client" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_processors" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_audio_utils" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_core" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_data_structures" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_dsp" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_events" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_graphics" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_basics" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="juce_gui_extra" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="viator_modules" path="../modules/viatordsp"/>
+      </MODULEPATHS>
+    </XCODE_MAC>
+  </EXPORTFORMATS>
+  <MODULES>
+    <MODULE id="juce_audio_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_devices" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_formats" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_plugin_client" showAllCode="1" useLocalCopy="0"
+            useGlobalPath="0"/>
+    <MODULE id="juce_audio_processors" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="juce_gui_extra" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+    <MODULE id="viator_modules" showAllCode="1" useLocalCopy="0" useGlobalPath="0"/>
+  </MODULES>
+</JUCERPROJECT>
