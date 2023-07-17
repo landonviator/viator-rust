@@ -12,4 +12,10 @@ extern const juce::String outputName;
 
 extern const juce::String driveID;
 extern const juce::String driveName;
+
+extern const juce::String degreeID;
+extern const juce::String degreeName;
+
+extern const juce::String orderID;
+extern const juce::String orderName;
 }

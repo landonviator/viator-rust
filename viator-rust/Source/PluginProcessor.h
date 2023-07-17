@@ -1,6 +1,6 @@
 #pragma once
 #include <JuceHeader.h>
-#include "Globals/Parameters.h"
+#include "globals/Parameters.h"
 
 //==============================================================================
 /**

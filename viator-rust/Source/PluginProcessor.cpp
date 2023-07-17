@@ -1,11 +1,3 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
@@ -203,6 +195,22 @@ bool ViatorrustAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 
 void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    
+    auto drive = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
+    auto degree = _treeState.getRawParameterValue(ViatorParameters::degreeID)->load();
+    auto order = _treeState.getRawParameterValue(ViatorParameters::orderID)->load();
+    
+    for (size_t sample = 0; sample < buffer.getNumSamples(); sample++)
+    {
+        for (size_t channel = 0; channel < buffer.getNumChannels(); channel++)
+        {
+            auto* inData = buffer.getArrayOfReadPointers();
+            auto* outData = buffer.getArrayOfWritePointers();
+            auto input = inData[channel][sample];
+            
+            outData[channel][sample] = input;
+        }
+    }
 }
 
 //==============================================================================

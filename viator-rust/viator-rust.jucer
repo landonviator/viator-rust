@@ -2,7 +2,7 @@
 
 <JUCERPROJECT id="nOvAUM" name="viator-rust" projectType="audioplug" useAppConfig="0"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" companyName="Viator DSP"
-              pluginName="Rust">
+              pluginName="Rust" cppLanguageStandard="17">
   <MAINGROUP id="reivZA" name="viator-rust">
     <GROUP id="{590D4FF8-B1D5-7AA2-AD3F-D495526EE06F}" name="Source">
       <GROUP id="{1D249E4D-2CA1-07E8-C28C-822C5A7AB176}" name="globals">
@@ -70,7 +70,8 @@
     <XCODE_MAC targetFolder="Builds/MacOSX">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="viator-rust"/>
-        <CONFIGURATION isDebug="0" name="Release" targetName="viator-rust"/>
+        <CONFIGURATION isDebug="0" name="Release" targetName="viator-rust" macOSDeploymentTarget="10.13"
+                       osxCompatibility="10.13 SDK"/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../modules/JUCE/modules"/>
