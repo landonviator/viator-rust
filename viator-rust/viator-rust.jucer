@@ -5,6 +5,12 @@
               pluginName="Rust">
   <MAINGROUP id="reivZA" name="viator-rust">
     <GROUP id="{590D4FF8-B1D5-7AA2-AD3F-D495526EE06F}" name="Source">
+      <GROUP id="{1D249E4D-2CA1-07E8-C28C-822C5A7AB176}" name="globals">
+        <FILE id="v4IvSJ" name="Globals.cpp" compile="1" resource="0" file="Source/globals/Globals.cpp"/>
+        <FILE id="VVF2J5" name="Globals.h" compile="0" resource="0" file="Source/globals/Globals.h"/>
+        <FILE id="eE4lKu" name="Parameters.cpp" compile="1" resource="0" file="Source/globals/Parameters.cpp"/>
+        <FILE id="mOOIoo" name="Parameters.h" compile="0" resource="0" file="Source/globals/Parameters.h"/>
+      </GROUP>
       <GROUP id="{8D6B5CF4-A69F-41FF-D19B-67CB34E5D162}" name="assets">
         <GROUP id="{31206C9A-67D2-6958-F558-1EE330BBDC69}" name="decor">
           <FILE id="bQuc4h" name="decor_grid.png" compile="0" resource="1" file="Source/assets/decor/decor_grid.png"/>

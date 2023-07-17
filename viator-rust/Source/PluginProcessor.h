@@ -1,22 +1,12 @@
-/*
-  ==============================================================================
-
-    This file contains the basic framework code for a JUCE plugin processor.
-
-  ==============================================================================
-*/
-
 #pragma once
-
 #include <JuceHeader.h>
+#include "Globals/Parameters.h"
 
 //==============================================================================
 /**
 */
 class ViatorrustAudioProcessor  : public juce::AudioProcessor
-                            #if JucePlugin_Enable_ARA
-                             , public juce::AudioProcessorARAExtension
-                            #endif
+, public juce::AudioProcessorValueTreeState::Listener
 {
 public:
     //==============================================================================
@@ -56,7 +46,23 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
+    // parameters
+    ViatorParameters::Params _parameterMap;
+    juce::AudioProcessorValueTreeState _treeState;
+    
 private:
+    
+    // parameters
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    void parameterChanged (const juce::String& parameterID, float newValue) override;
+    using Parameter = juce::AudioProcessorValueTreeState::Parameter;
+    static juce::String valueToTextFunction(float x) { return juce::String(static_cast<int>(x)); }
+    static float textToValueFunction(const juce::String& str) { return str.getFloatValue(); }
+    void updateParameters();
+    
+    // dsp
+    juce::dsp::ProcessSpec _spec;
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ViatorrustAudioProcessor)
 };
