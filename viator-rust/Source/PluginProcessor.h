@@ -63,6 +63,10 @@ private:
     // dsp
     juce::dsp::ProcessSpec _spec;
     
+    // Lookup Table
+    int _lookupTableSize;
+    juce::dsp::LookupTableTransform<float> _lookupTable;
+    
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ViatorrustAudioProcessor)
 };

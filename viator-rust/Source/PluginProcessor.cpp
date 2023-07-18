@@ -1,5 +1,6 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include <cmath>
 
 //==============================================================================
 ViatorrustAudioProcessor::ViatorrustAudioProcessor()
@@ -113,19 +114,19 @@ juce::AudioProcessorValueTreeState::ParameterLayout ViatorrustAudioProcessor::cr
     for (int i = 0; i < _parameterMap.getSliderParams().size(); i++)
     {
         auto param = _parameterMap.getSliderParams()[i];
-        
+
         if (param.isInt == ViatorParameters::SliderParameterData::NumericType::kInt || param.isSkew == ViatorParameters::SliderParameterData::SkewType::kSkew)
         {
             auto range = juce::NormalisableRange<float>(param.min, param.max);
-            
+
             if (param.isSkew == ViatorParameters::SliderParameterData::SkewType::kSkew)
             {
                 range.setSkewForCentre(param.center);
             }
-            
+
             params.push_back (std::make_unique<juce::AudioProcessorValueTreeState::Parameter>(juce::ParameterID { param.paramID, 1 }, param.name, param.name, range, param.initial, valueToTextFunction, textToValueFunction));
         }
-        
+
         else
         {
             params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { param.paramID, 1 }, param.name, param.min, param.max, param.initial));
@@ -150,7 +151,7 @@ void ViatorrustAudioProcessor::parameterChanged(const juce::String &parameterID,
 
 void ViatorrustAudioProcessor::updateParameters()
 {
-    
+
 }
 
 //==============================================================================
@@ -159,6 +160,11 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _spec.maximumBlockSize = samplesPerBlock;
     _spec.numChannels = getTotalNumInputChannels();
     _spec.sampleRate = sampleRate;
+    
+    _lookupTableSize = samplesPerBlock * 0.1;
+    
+    // populate table
+    _lookupTable.initialise([](float x) {return 2.0 / 3.14 * std::atan(x * 20.0);}, -1.0f, 1.0f, 64);
 }
 
 void ViatorrustAudioProcessor::releaseResources()
@@ -196,21 +202,29 @@ bool ViatorrustAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     
-    auto drive = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
-    auto degree = _treeState.getRawParameterValue(ViatorParameters::degreeID)->load();
-    auto order = _treeState.getRawParameterValue(ViatorParameters::orderID)->load();
+//    auto drive = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
+//    auto degree = _treeState.getRawParameterValue(ViatorParameters::degreeID)->load();
+//    auto order = _treeState.getRawParameterValue(ViatorParameters::orderID)->load();
     
-    for (size_t sample = 0; sample < buffer.getNumSamples(); sample++)
+    for (int ch = 0; ch < buffer.getNumChannels(); ch++)
     {
-        for (size_t channel = 0; channel < buffer.getNumChannels(); channel++)
+        auto* channelData = buffer.getWritePointer(ch);
+        
+        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            auto* inData = buffer.getArrayOfReadPointers();
-            auto* outData = buffer.getArrayOfWritePointers();
-            auto input = inData[channel][sample];
-            
-            outData[channel][sample] = input;
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
+            channelData[sample] = _lookupTable.processSampleUnchecked(channelData[sample]);
         }
     }
+
 }
 
 //==============================================================================
@@ -228,15 +242,17 @@ juce::AudioProcessorEditor* ViatorrustAudioProcessor::createEditor()
 //==============================================================================
 void ViatorrustAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
-    // You should use this method to store your parameters in the memory block.
-    // You could do that either as raw data, or use the XML or ValueTree classes
-    // as intermediaries to make it easy to save and load complex data.
+    juce::MemoryOutputStream stream(destData, false);
+    _treeState.state.writeToStream (stream);
 }
 
 void ViatorrustAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
-    // You should use this method to restore your parameters from this memory block,
-    // whose contents will have been created by the getStateInformation() call.
+    auto tree = juce::ValueTree::readFromData (data, size_t(sizeInBytes));
+    if (tree.isValid())
+    {
+        _treeState.state = tree;
+    }
 }
 
 //==============================================================================
