@@ -14,7 +14,6 @@ ViatorrustAudioProcessor::ViatorrustAudioProcessor()
                      #endif
                        )
 , _treeState(*this, nullptr, "PARAMETERS", createParameterLayout())
-, frequency_(1.0), amplitude_(0.5), a_(1.4), b_(0.3), x_(0.1), y_(0.1)
 #endif
 {
     // sliders
@@ -164,6 +163,11 @@ void ViatorrustAudioProcessor::updateParameters()
     _lfoOsc.setFrequency(humFreq);
     _humFilterModule.setParameter(svFilter::ParameterId::kCutoff, humFreq * 2.0);
     _humFilterModule.setParameter(svFilter::ParameterId::kGain, hum);
+    
+    phaseIncrement = 2.0 * 3.14 * humFreq / getSampleRate();
+    
+    // testing
+    _coeffA.store(_treeState.getRawParameterValue(ViatorParameters::coeffAID)->load());
 }
 
 //==============================================================================
@@ -173,20 +177,20 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _spec.numChannels = getTotalNumInputChannels();
     _spec.sampleRate = sampleRate;
     
-    _henonOsc.prepare(_spec);
-    _henonOsc.initialise([this](float input)
-     {
-            double x = y_ + 1.0 - a_ * x_ * x_;
-            double y = b_ * x_;
-
-            x_ = x;
-            y_ = y;
-
-            input = x_ * amplitude_;
-            input *= 0.5; // Scale the output to prevent clipping
-
-            return static_cast<float>(input);
-     });
+//    _henonOsc.prepare(_spec);
+//    _henonOsc.initialise([this](float input)
+//     {
+//            double x = y_ + 1.0 - a_ * x_ * x_;
+//            double y = b_ * x_;
+//
+//            x_ = x;
+//            y_ = y;
+//
+//            input = x_ * amplitude_;
+//            input *= 0.5; // Scale the output to prevent clipping
+//
+//            return static_cast<float>(input);
+//     });
     
     // lfo
     _lfoOsc.prepare(_spec);
@@ -238,16 +242,43 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
 {
     juce::dsp::AudioBlock<float> block {buffer};
     
-    auto* channelData = buffer.getArrayOfWritePointers();
+//    auto* channelData = buffer.getArrayOfWritePointers();
     
-    for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+//    for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+//    {
+//        for (int ch = 0; ch < buffer.getNumChannels(); ch++)
+//        {
+//            auto input = channelData[ch][sample];
+//            auto modulationSignal = _lfoOsc.processSample(input) + 1.0f;
+//
+//            channelData[ch][sample] = std::sin(x);
+//        }
+//
+//        const double new_x = y + 1 - a * x * x;
+//        const double new_y = b * x;
+//        x = new_x;
+//        y = new_y;
+//    }
+    int numSamplesProcessed = 0;
+    
+    for (int ch = 0; ch < buffer.getNumChannels(); ch++)
     {
-        for (int ch = 0; ch < buffer.getNumChannels(); ch++)
+        auto* channelData = buffer.getWritePointer(ch);
+        
+        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            auto input = channelData[ch][sample];
-            auto modulationSignal = _lfoOsc.processSample(input);
+            auto input = channelData[sample];
+            auto modulationSignal = _lfoOsc.processSample(input) + 1.0f;
             
-            channelData[ch][sample] = input * (1.0f + modulationSignal);
+            channelData[sample] = std::sin(x);
+            
+            if (sample % static_cast<int>(_treeState.getRawParameterValue(ViatorParameters::chaosFreqID)->load()) == 0)
+            {
+                const double new_x = y + 1 - a * (x * x);
+                const double new_y = _coeffA.load() * x;
+                x = new_x;
+                y = new_y;
+            }
         }
     }
 }
@@ -263,16 +294,16 @@ float ViatorrustAudioProcessor::processPolynomial(float input)
 
 float ViatorrustAudioProcessor::getHenonSample()
 {
-    double x = y_ + 1.0 - a_ * x_ * x_;
-    double y = b_ * x_;
-
-    x_ = x;
-    y_ = y;
-
-    double sample = x_ * amplitude_;
-    sample *= 0.5; // Scale the output to prevent clipping
-
-    return static_cast<float>(sample);
+//    double x = y_ + 1.0 - a_ * x_ * x_;
+//    double y = b_ * x_;
+//
+//    x_ = x;
+//    y_ = y;
+//
+//    double sample = x_ * amplitude_;
+//    sample *= 0.5; // Scale the output to prevent clipping
+//
+//    return static_cast<float>(sample);
 }
 
 //==============================================================================

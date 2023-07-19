@@ -22,10 +22,14 @@ void ViatorParameters::Params::initSliderParams()
     _sliderParams.push_back({ViatorParameters::driveID, ViatorParameters::driveName, 0.0f, 30.0f, 0.0f, skew::kNoSkew, 0.0, type::kFloat});
     
     // lfo
-    _sliderParams.push_back({ViatorParameters::lfoFreqID, ViatorParameters::lfoFreqName, 1.0f, 10.0f, 2.0f, skew::kNoSkew, 0.0, type::kInt});
+    _sliderParams.push_back({ViatorParameters::lfoFreqID, ViatorParameters::lfoFreqName, 1.0f, 220.0f, 2.0f, skew::kNoSkew, 0.0, type::kInt});
     
     // filter
     _sliderParams.push_back({ViatorParameters::lowpassNoiseID, ViatorParameters::lowpassNoiseName, 20.0f, 20000.0f, 1400.0f, skew::kSkew, 1400.0, type::kInt});
+    
+    // testing
+    _sliderParams.push_back({ViatorParameters::coeffAID, ViatorParameters::coeffAName, 0.0f, 0.3f, 0.0f, skew::kNoSkew, 0.0, type::kFloat});
+    _sliderParams.push_back({ViatorParameters::chaosFreqID, ViatorParameters::chaosFreqName, 1.0f, 100.0f, 1.0f, skew::kNoSkew, 0.0, type::kInt});
 }
 
 void ViatorParameters::Params::initButtonParams()

@@ -19,6 +19,13 @@ extern const juce::String lfoFreqName;
 extern const juce::String lowpassNoiseID;
 extern const juce::String lowpassNoiseName;
 
+extern const juce::String coeffAID;
+extern const juce::String coeffAName;
+
+extern const juce::String chaosFreqID;
+extern const juce::String chaosFreqName;
+
+
 extern const juce::String modeID;
 extern const juce::String modeName;
 }

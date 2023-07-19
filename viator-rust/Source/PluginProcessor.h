@@ -68,14 +68,16 @@ private:
     juce::dsp::Oscillator<float> _lfoOsc;
     double frequency_;
     double amplitude_;
-    double a_;
-    double b_;
-    double x_; // State variable for the Henon map
-    double y_; // State variable for the Henon map
+    const double a = 1.4;      // Hénon map parameter
+    const double b = 0.3;      // Hénon map parameter
+    double x;                  // current x coordinate
+    double y; 
     juce::dsp::LinkwitzRileyFilter<float> _noiseLowpassModule;
     viator_dsp::SVFilter<float> _humFilterModule;
     float modulationFrequency = 5.0f; // Adjust this value to set the modulation frequency
     float phase = 0.0f;
+    float phaseIncrement = 0.0f;
+    std::atomic<float> _coeffA;
     
     // Lookup Table
     int _lookupTableSize;
