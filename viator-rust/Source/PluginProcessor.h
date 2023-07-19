@@ -62,6 +62,18 @@ private:
     
     // dsp
     juce::dsp::ProcessSpec _spec;
+    float processPolynomial(float input);
+    float getHenonSample();
+    juce::dsp::Oscillator<float> _henonOsc;
+    juce::dsp::Oscillator<float> _lfoOsc;
+    double frequency_;
+    double amplitude_;
+    double a_;
+    double b_;
+    double x_; // State variable for the Henon map
+    double y_; // State variable for the Henon map
+    juce::dsp::LinkwitzRileyFilter<float> _noiseLowpassModule;
+    viator_dsp::SVFilter<float> _humFilterModule;
     
     // Lookup Table
     int _lookupTableSize;
