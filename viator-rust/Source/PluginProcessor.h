@@ -74,6 +74,8 @@ private:
     double y_; // State variable for the Henon map
     juce::dsp::LinkwitzRileyFilter<float> _noiseLowpassModule;
     viator_dsp::SVFilter<float> _humFilterModule;
+    float modulationFrequency = 5.0f; // Adjust this value to set the modulation frequency
+    float phase = 0.0f;
     
     // Lookup Table
     int _lookupTableSize;

@@ -159,8 +159,8 @@ void ViatorrustAudioProcessor::updateParameters()
     _noiseLowpassModule.setCutoffFrequency(noiseLP);
     
     // hum
-    auto hum = _treeState.getRawParameterValue(ViatorParameters::humID)->load();
-    auto humFreq = _treeState.getRawParameterValue(ViatorParameters::humFreqID)->load();
+    auto hum = _treeState.getRawParameterValue(ViatorParameters::lfoFreqID)->load();
+    auto humFreq = _treeState.getRawParameterValue(ViatorParameters::lfoFreqID)->load();
     _lfoOsc.setFrequency(humFreq);
     _humFilterModule.setParameter(svFilter::ParameterId::kCutoff, humFreq * 2.0);
     _humFilterModule.setParameter(svFilter::ParameterId::kGain, hum);
@@ -173,10 +173,6 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _spec.numChannels = getTotalNumInputChannels();
     _spec.sampleRate = sampleRate;
     
-    _lookupTableSize = samplesPerBlock * 0.1;
-    
-    // populate table
-    _lookupTable.initialise([](float x) {return 2.0 / 3.14 * std::atan(x * 20.0);}, -1.0f, 1.0f, 64);
     _henonOsc.prepare(_spec);
     _henonOsc.initialise([this](float input)
      {
@@ -203,12 +199,7 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _noiseLowpassModule.prepare(_spec);
     _noiseLowpassModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
     
-    // hum filter
-    using svFilter = viator_dsp::SVFilter<float>;
-    _humFilterModule.prepare(_spec);
-    _humFilterModule.setParameter(svFilter::ParameterId::kType, svFilter::FilterType::kBandShelf);
-    _humFilterModule.setParameter(svFilter::ParameterId::kQType, svFilter::QType::kParametric);
-    _humFilterModule.setParameter(svFilter::ParameterId::kQ, 0.9);
+    updateParameters();
 }
 
 void ViatorrustAudioProcessor::releaseResources()
@@ -246,13 +237,6 @@ bool ViatorrustAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     juce::dsp::AudioBlock<float> block {buffer};
-    //_henonOsc.process(juce::dsp::ProcessContextReplacing<float>(block));
-    //_lfoOsc.process(juce::dsp::ProcessContextReplacing<float>(block));
-    
-//    auto drive = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
-//    auto degree = _treeState.getRawParameterValue(ViatorParameters::degreeID)->load();
-//    auto order = _treeState.getRawParameterValue(ViatorParameters::orderID)->load();
-    auto mode = _treeState.getRawParameterValue(ViatorParameters::modeID)->load();
     
     auto* channelData = buffer.getArrayOfWritePointers();
     
@@ -261,16 +245,11 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         for (int ch = 0; ch < buffer.getNumChannels(); ch++)
         {
             auto input = channelData[ch][sample];
-            auto henon = _henonOsc.processSample(input);
-            auto lfo = _lfoOsc.processSample(input);
+            auto modulationSignal = _lfoOsc.processSample(input);
             
-            float output = henon * lfo * (mode ? 1.0f : input);
-            channelData[ch][sample] = output;
+            channelData[ch][sample] = input * (1.0f + modulationSignal);
         }
     }
-    
-    _noiseLowpassModule.process(juce::dsp::ProcessContextReplacing<float>(block));
-    _humFilterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
 }
 
 float ViatorrustAudioProcessor::processPolynomial(float input)

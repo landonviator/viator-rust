@@ -21,9 +21,8 @@ void ViatorParameters::Params::initSliderParams()
     // drive
     _sliderParams.push_back({ViatorParameters::driveID, ViatorParameters::driveName, 0.0f, 30.0f, 0.0f, skew::kNoSkew, 0.0, type::kFloat});
     
-    // hum
-    _sliderParams.push_back({ViatorParameters::humID, ViatorParameters::humName, -30.0f, 30.0f, 0.0f, skew::kNoSkew, 0.0, type::kFloat});
-    _sliderParams.push_back({ViatorParameters::humFreqID, ViatorParameters::humFreqName, 20.0f, 20000.0f, 60.0f, skew::kSkew, 1000.0, type::kInt});
+    // lfo
+    _sliderParams.push_back({ViatorParameters::lfoFreqID, ViatorParameters::lfoFreqName, 1.0f, 10.0f, 2.0f, skew::kNoSkew, 0.0, type::kInt});
     
     // filter
     _sliderParams.push_back({ViatorParameters::lowpassNoiseID, ViatorParameters::lowpassNoiseName, 20.0f, 20000.0f, 1400.0f, skew::kSkew, 1400.0, type::kInt});
