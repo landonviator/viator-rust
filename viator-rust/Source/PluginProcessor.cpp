@@ -194,6 +194,8 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _inputLowpassModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
     _inputLowpassModule.setCutoffFrequency(1000.0);
     
+    _ramper.setTarget(0.0f, 1.0f, sampleRate * 0.02);
+    
     updateParameters();
 }
 
@@ -244,8 +246,9 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
 //        }
 //    }
     
-    synthesizeRandomHiss(buffer);
-    buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
+    //synthesizeRandomHiss(buffer);
+    //buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
+    synthesizeRandomCrackle(buffer);
 }
 
 void ViatorrustAudioProcessor::synthesizeRandomHiss(juce::AudioBuffer<float> &buffer)
@@ -279,6 +282,59 @@ void ViatorrustAudioProcessor::synthesizeRandomHiss(juce::AudioBuffer<float> &bu
             auto hiss = filteredNoise * noiseSpeed + filteredNoise * 0.05;
             
             channelData[sample] = hiss * hissVolume + filteredInput;
+        }
+    }
+}
+
+void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> &buffer)
+{
+    auto hissSpeed = _treeState.getRawParameterValue(ViatorParameters::hissSpeedID)->load();
+    _hissSpeedFilterModule.setCutoffFrequency(hissSpeed);
+    auto hissTone = _treeState.getRawParameterValue(ViatorParameters::hissToneID)->load();
+    _hissLowpassModule.setCutoffFrequency(hissTone);
+    auto driveDB = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
+    auto drive = juce::Decibels::decibelsToGain(driveDB);
+    
+    for (int ch = 0; ch < buffer.getNumChannels(); ch++)
+    {
+        auto* channelData = buffer.getWritePointer(ch);
+        
+        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+        {
+            auto input = channelData[sample];
+            auto noise = (_noise.nextFloat() * 2.0 - 1.0) * 0.1;
+            auto filteredNoise = _hissLowpassModule.processSample(ch, noise);
+            auto noiseSpeed = _hissSpeedFilterModule.processSample(ch, filteredNoise);
+            noiseSpeed *= 10.0;
+            noiseSpeed *= noiseSpeed;
+            noiseSpeed *= 20.0;
+            auto signal = noiseSpeed;
+            
+            if (rampedValue < 1.0)
+            {
+                signal *= rampedValue;
+            }
+            
+            else
+            {
+                _ramper.setTarget(0.96f, 1.0f, getSampleRate() * 0.003);
+                rampedValue = 0.0;
+            }
+            
+            while(!_ramper.ramp(rampedValue))
+            {
+                signal *= rampedValue;
+            }
+            
+            if (rampedValue < 1.0)
+            {
+                if (input > 0.0)
+                {
+                    input *= -1.0;
+                }
+                
+                channelData[sample] = 2.0 / 3.14 * std::atan((signal + noiseSpeed * 0.1) * drive) + input;
+            }
         }
     }
 }

@@ -9,6 +9,9 @@ const juce::String inputName = "Input";
 const juce::String outputID = "outputID";
 const juce::String outputName = "Output";
 
+extern const juce::String driveID = "driveID";
+extern const juce::String driveName = "Drive";
+
 extern const juce::String lfoFreqID = "lfoFreqID";
 extern const juce::String lfoFreqName = "LFO Freq";
 

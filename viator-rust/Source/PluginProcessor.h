@@ -2,6 +2,47 @@
 #include <JuceHeader.h>
 #include "globals/Parameters.h"
 
+/** A Ramper applies linear ramping to a value.
+*    @ingroup utility
+*
+*/
+class Ramper
+{
+public:
+    Ramper():
+        targetValue(0.0f),
+        stepDelta(0.0f),
+        stepAmount(-1)
+    {};
+
+    /** Sets the step amount that the ramper will use. You can overwrite this value by supplying a step number in setTarget. */
+    void setStepAmount(int newStepAmount) { stepAmount = newStepAmount; };
+    /** sets the new target and recalculates the step size using either the supplied step number or the step amount previously set by setStepAmount(). */
+    void setTarget(float currentValue, float newTarget, int numberOfSteps=-1)
+    {
+        if(numberOfSteps != -1) stepDelta = (newTarget - currentValue) / numberOfSteps;
+        else if (stepAmount != -1) stepDelta = (newTarget - currentValue) / stepAmount;
+        else jassertfalse; // Either the step amount should be set, or a new step amount should be supplied
+        targetValue = newTarget;
+    };
+    /** Sets the ramper value and the target to the new value and stops ramping. */
+    void setValue(float newValue)
+    {
+        targetValue = newValue;
+        stepDelta = 0.0f;
+    };
+    /** ramps the supplied value and returns true if the targetValue is reached. */
+    inline bool ramp(float &valueToChange)
+    {
+        valueToChange += stepDelta;
+        return abs(targetValue - valueToChange) > 0.001;
+        
+    };
+private:
+    float targetValue, stepDelta;
+    int stepAmount;
+};
+
 //==============================================================================
 /**
 */
@@ -83,6 +124,9 @@ private:
     juce::Time _time;
     juce::Random _noise{_time.getMilliseconds()};
     void synthesizeRandomHiss(juce::AudioBuffer<float>& buffer);
+    void synthesizeRandomCrackle(juce::AudioBuffer<float>& buffer);
+    float rampedValue = 0.0f;
+    Ramper _ramper;
     
     // Lookup Table
     int _lookupTableSize;

@@ -10,6 +10,9 @@ extern const juce::String inputName;
 extern const juce::String outputID;
 extern const juce::String outputName;
 
+extern const juce::String driveID;
+extern const juce::String driveName;
+
 extern const juce::String lfoFreqID;
 extern const juce::String lfoFreqName;
 
