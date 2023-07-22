@@ -116,6 +116,10 @@ private:
     juce::dsp::LinkwitzRileyFilter<float> _hissLowpassModule;
     juce::dsp::LinkwitzRileyFilter<float> _inputLowpassModule;
     juce::dsp::LinkwitzRileyFilter<float> _hissSpeedFilterModule;
+    juce::dsp::LinkwitzRileyFilter<float> _hissHighpassModule;
+    juce::dsp::LinkwitzRileyFilter<float> _noiseLowpassModule;
+    juce::dsp::LinkwitzRileyFilter<float> _midSeparaterModule;
+    juce::dsp::LinkwitzRileyFilter<float> _lowSeparaterModule;
     viator_dsp::SVFilter<float> _humFilterModule;
     float modulationFrequency = 5.0f; // Adjust this value to set the modulation frequency
     float phase = 0.0f;
@@ -125,6 +129,7 @@ private:
     juce::Random _noise{_time.getMilliseconds()};
     void synthesizeRandomHiss(juce::AudioBuffer<float>& buffer);
     void synthesizeRandomCrackle(juce::AudioBuffer<float>& buffer);
+    void distortMidRange(juce::AudioBuffer<float>& buffer);
     float rampedValue = 0.0f;
     Ramper _ramper;
     

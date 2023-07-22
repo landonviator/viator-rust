@@ -193,6 +193,19 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _inputLowpassModule.prepare(_spec);
     _inputLowpassModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
     _inputLowpassModule.setCutoffFrequency(1000.0);
+    _hissHighpassModule.prepare(_spec);
+    _hissHighpassModule.setType(juce::dsp::LinkwitzRileyFilterType::highpass);
+    _hissHighpassModule.setCutoffFrequency(100.0);
+    _noiseLowpassModule.prepare(_spec);
+    _noiseLowpassModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
+    _noiseLowpassModule.setCutoffFrequency(7000.0);
+    
+    _midSeparaterModule.prepare(_spec);
+    _midSeparaterModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
+    _midSeparaterModule.setCutoffFrequency(4000.0);
+    _lowSeparaterModule.prepare(_spec);
+    _lowSeparaterModule.setType(juce::dsp::LinkwitzRileyFilterType::highpass);
+    _lowSeparaterModule.setCutoffFrequency(300.0);
     
     _ramper.setTarget(0.0f, 1.0f, sampleRate * 0.02);
     
@@ -247,8 +260,9 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
 //    }
     
     //synthesizeRandomHiss(buffer);
-    //buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
     synthesizeRandomCrackle(buffer);
+    distortMidRange(buffer);
+    buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
 }
 
 void ViatorrustAudioProcessor::synthesizeRandomHiss(juce::AudioBuffer<float> &buffer)
@@ -328,13 +342,35 @@ void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> 
             
             if (rampedValue < 1.0)
             {
-                if (input > 0.0)
-                {
-                    input *= -1.0;
-                }
-                
-                channelData[sample] = 2.0 / 3.14 * std::atan((signal + noiseSpeed * 0.1) * drive) + input;
+                auto outNoise = _noiseLowpassModule.processSample(ch, noise) * 0.05;
+                auto hpNoise = _hissHighpassModule.processSample(ch, signal);
+                auto output = outNoise + hpNoise;
+                channelData[sample] = output;
             }
+        }
+    }
+}
+
+void ViatorrustAudioProcessor::distortMidRange(juce::AudioBuffer<float> &buffer)
+{
+    auto driveDB = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
+    auto drive = juce::Decibels::decibelsToGain(driveDB);
+    
+    for (int ch = 0; ch < buffer.getNumChannels(); ch++)
+    {
+        auto* channelData = buffer.getWritePointer(ch);
+        
+        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+        {
+            auto input = channelData[sample];
+            auto highPassed = _lowSeparaterModule.processSample(ch, input);
+            float midRange;
+            float high;
+            _midSeparaterModule.processSample(ch, highPassed, midRange, high);
+            auto distortedMid = 2.0 / 3.14 * std::atan(midRange * drive);
+            auto compensatedMid = distortedMid * juce::Decibels::decibelsToGain(-driveDB * 0.5);
+            auto output = input - highPassed + compensatedMid + high;
+            channelData[sample] = output;
         }
     }
 }
