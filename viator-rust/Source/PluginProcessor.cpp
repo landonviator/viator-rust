@@ -152,22 +152,6 @@ void ViatorrustAudioProcessor::parameterChanged(const juce::String &parameterID,
 void ViatorrustAudioProcessor::updateParameters()
 {
     using svFilter = viator_dsp::SVFilter<float>;
-    
-    // noise lowpass
-    auto noiseLP = _treeState.getRawParameterValue(ViatorParameters::lowpassNoiseID)->load();
-    _noiseLowpassModule.setCutoffFrequency(noiseLP);
-    
-    // hum
-    auto hum = _treeState.getRawParameterValue(ViatorParameters::lfoFreqID)->load();
-    auto humFreq = _treeState.getRawParameterValue(ViatorParameters::lfoFreqID)->load();
-    _lfoOsc.setFrequency(humFreq);
-    _humFilterModule.setParameter(svFilter::ParameterId::kCutoff, humFreq * 2.0);
-    _humFilterModule.setParameter(svFilter::ParameterId::kGain, hum);
-    
-    phaseIncrement = 2.0 * 3.14 * humFreq / getSampleRate();
-    
-    // testing
-    _coeffA.store(_treeState.getRawParameterValue(ViatorParameters::coeffAID)->load());
 }
 
 //==============================================================================
@@ -177,20 +161,20 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _spec.numChannels = getTotalNumInputChannels();
     _spec.sampleRate = sampleRate;
     
-//    _henonOsc.prepare(_spec);
-//    _henonOsc.initialise([this](float input)
-//     {
-//            double x = y_ + 1.0 - a_ * x_ * x_;
-//            double y = b_ * x_;
-//
-//            x_ = x;
-//            y_ = y;
-//
-//            input = x_ * amplitude_;
-//            input *= 0.5; // Scale the output to prevent clipping
-//
-//            return static_cast<float>(input);
-//     });
+    _henonOsc.prepare(_spec);
+    _henonOsc.initialise([this](float input)
+     {
+            double x = y_ + 1.0 - a * x_ * x_;
+            double y = b * x_;
+
+            x_ = x;
+            y_ = y;
+
+            input = x_ * amplitude_;
+            input *= 0.5; // Scale the output to prevent clipping
+
+            return static_cast<float>(input);
+     });
     
     // lfo
     _lfoOsc.prepare(_spec);
@@ -200,8 +184,15 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
      });
     
     // noise lowpass
-    _noiseLowpassModule.prepare(_spec);
-    _noiseLowpassModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
+    _hissLowpassModule.prepare(_spec);
+    _hissLowpassModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
+    _hissLowpassModule.setCutoffFrequency(1000.0);
+    _hissSpeedFilterModule.prepare(_spec);
+    _hissSpeedFilterModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
+    _hissSpeedFilterModule.setCutoffFrequency(10.0);
+    _inputLowpassModule.prepare(_spec);
+    _inputLowpassModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
+    _inputLowpassModule.setCutoffFrequency(1000.0);
     
     updateParameters();
 }
@@ -242,24 +233,31 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
 {
     juce::dsp::AudioBlock<float> block {buffer};
     
-//    auto* channelData = buffer.getArrayOfWritePointers();
-    
-//    for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+//    for (int ch = 0; ch < buffer.getNumChannels(); ch++)
 //    {
-//        for (int ch = 0; ch < buffer.getNumChannels(); ch++)
+//        auto* channelData = buffer.getWritePointer(ch);
+//
+//        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
 //        {
-//            auto input = channelData[ch][sample];
-//            auto modulationSignal = _lfoOsc.processSample(input) + 1.0f;
-//
-//            channelData[ch][sample] = std::sin(x);
+//            auto input = channelData[sample];
+//            channelData[sample] = input;
 //        }
-//
-//        const double new_x = y + 1 - a * x * x;
-//        const double new_y = b * x;
-//        x = new_x;
-//        y = new_y;
 //    }
-    int numSamplesProcessed = 0;
+    
+    synthesizeRandomHiss(buffer);
+    buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
+}
+
+void ViatorrustAudioProcessor::synthesizeRandomHiss(juce::AudioBuffer<float> &buffer)
+{
+    auto hissSpeed = _treeState.getRawParameterValue(ViatorParameters::hissSpeedID)->load();
+    _hissSpeedFilterModule.setCutoffFrequency(hissSpeed);
+    
+    auto hissVolumeDB = _treeState.getRawParameterValue(ViatorParameters::hissVolumeID)->load();
+    auto hissVolume = juce::Decibels::decibelsToGain(hissVolumeDB);
+    
+    auto hissTone = _treeState.getRawParameterValue(ViatorParameters::hissToneID)->load();
+    _hissLowpassModule.setCutoffFrequency(hissTone);
     
     for (int ch = 0; ch < buffer.getNumChannels(); ch++)
     {
@@ -268,42 +266,21 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
             auto input = channelData[sample];
-            auto modulationSignal = _lfoOsc.processSample(input) + 1.0f;
             
-            channelData[sample] = std::sin(x);
+            auto noise = _noise.nextFloat() * 2.0 - 1.0;
+            auto noiseSpeed = _hissSpeedFilterModule.processSample(ch, noise);
+            auto filteredNoise = _hissLowpassModule.processSample(ch, noise);
+            auto filteredInput = _inputLowpassModule.processSample(ch, input);
             
-            if (sample % static_cast<int>(_treeState.getRawParameterValue(ViatorParameters::chaosFreqID)->load()) == 0)
-            {
-                const double new_x = y + 1 - a * (x * x);
-                const double new_y = _coeffA.load() * x;
-                x = new_x;
-                y = new_y;
-            }
+            noiseSpeed *= 10.0;
+            noiseSpeed *= noiseSpeed;
+            noiseSpeed *= 20.0;
+            
+            auto hiss = filteredNoise * noiseSpeed + filteredNoise * 0.05;
+            
+            channelData[sample] = hiss * hissVolume + filteredInput;
         }
     }
-}
-
-float ViatorrustAudioProcessor::processPolynomial(float input)
-{
-    auto rawDrive = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
-    auto drive = juce::Decibels::decibelsToGain(rawDrive);
-    input *= drive;
-    
-    return 16.0 * pow(input , 5.0) - 20.0 * pow(input, 3.0) + 5 * input;
-}
-
-float ViatorrustAudioProcessor::getHenonSample()
-{
-//    double x = y_ + 1.0 - a_ * x_ * x_;
-//    double y = b_ * x_;
-//
-//    x_ = x;
-//    y_ = y;
-//
-//    double sample = x_ * amplitude_;
-//    sample *= 0.5; // Scale the output to prevent clipping
-//
-//    return static_cast<float>(sample);
 }
 
 //==============================================================================

@@ -9,20 +9,17 @@ const juce::String inputName = "Input";
 const juce::String outputID = "outputID";
 const juce::String outputName = "Output";
 
-extern const juce::String driveID = "driveID";
-extern const juce::String driveName = "Drive";
-
 extern const juce::String lfoFreqID = "lfoFreqID";
 extern const juce::String lfoFreqName = "LFO Freq";
 
-extern const juce::String lowpassNoiseID = "lowpassNoiseID";
-extern const juce::String lowpassNoiseName = "Noise Lowpass";
+extern const juce::String hissSpeedID = "hissSpeedID";
+extern const juce::String hissSpeedName = "Hiss Speed";
 
-extern const juce::String coeffAID = "coeffAID";
-extern const juce::String coeffAName = "Coeff A";
+extern const juce::String hissVolumeID = "hissVolumeID";
+extern const juce::String hissVolumeName = "Hiss Volume";
 
-extern const juce::String chaosFreqID = "chaosFreqID";
-extern const juce::String chaosFreqName = "Chaos Freq";
+extern const juce::String hissToneID = "hissToneID";
+extern const juce::String hissToneName = "Hiss Tone";
 
 extern const juce::String modeID = "modeID";
 extern const juce::String modeName = "Mode";

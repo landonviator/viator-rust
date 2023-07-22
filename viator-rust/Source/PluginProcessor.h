@@ -62,8 +62,6 @@ private:
     
     // dsp
     juce::dsp::ProcessSpec _spec;
-    float processPolynomial(float input);
-    float getHenonSample();
     juce::dsp::Oscillator<float> _henonOsc;
     juce::dsp::Oscillator<float> _lfoOsc;
     double frequency_;
@@ -71,13 +69,20 @@ private:
     const double a = 1.4;      // Hénon map parameter
     const double b = 0.3;      // Hénon map parameter
     double x;                  // current x coordinate
-    double y; 
-    juce::dsp::LinkwitzRileyFilter<float> _noiseLowpassModule;
+    double y;
+    double x_;                  // current x coordinate
+    double y_;
+    juce::dsp::LinkwitzRileyFilter<float> _hissLowpassModule;
+    juce::dsp::LinkwitzRileyFilter<float> _inputLowpassModule;
+    juce::dsp::LinkwitzRileyFilter<float> _hissSpeedFilterModule;
     viator_dsp::SVFilter<float> _humFilterModule;
     float modulationFrequency = 5.0f; // Adjust this value to set the modulation frequency
     float phase = 0.0f;
     float phaseIncrement = 0.0f;
     std::atomic<float> _coeffA;
+    juce::Time _time;
+    juce::Random _noise{_time.getMilliseconds()};
+    void synthesizeRandomHiss(juce::AudioBuffer<float>& buffer);
     
     // Lookup Table
     int _lookupTableSize;
