@@ -151,7 +151,20 @@ void ViatorrustAudioProcessor::parameterChanged(const juce::String &parameterID,
 
 void ViatorrustAudioProcessor::updateParameters()
 {
-    using svFilter = viator_dsp::SVFilter<float>;
+    // filters
+    auto cutoff = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
+    auto lowRrange = juce::NormalisableRange<float>(20.0f, 300.0f, 1.0f);
+    auto highRange = juce::NormalisableRange<float>(3000.0f, 20000.0f, 1.0f);
+    lowRrange.setSkewForCentre(100.0f);
+    highRange.setSkewForCentre(10000.0);
+    auto lowCutoff = juce::jmap(cutoff, 0.0f, 30.0f, lowRrange.start, lowRrange.end);
+    auto highCutoff = juce::jmap(cutoff, 0.0f, 30.0f, highRange.end, highRange.start);
+    _lowConstrainFilterModule.setCutoffFrequency(lowCutoff);
+    _highConstrainFilterModule.setCutoffFrequency(highCutoff);
+    
+    // gain
+    auto hissVolume = _treeState.getRawParameterValue(ViatorParameters::hissVolumeID)->load();
+    _hissVolumeModule.setGainDecibels(hissVolume);
 }
 
 //==============================================================================
@@ -207,6 +220,14 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _lowSeparaterModule.setType(juce::dsp::LinkwitzRileyFilterType::highpass);
     _lowSeparaterModule.setCutoffFrequency(300.0);
     
+    _lowConstrainFilterModule.prepare(_spec);
+    _lowConstrainFilterModule.setType(juce::dsp::LinkwitzRileyFilterType::highpass);
+    _highConstrainFilterModule.prepare(_spec);
+    _highConstrainFilterModule.setType(juce::dsp::LinkwitzRileyFilterType::lowpass);
+    
+    _hissVolumeModule.prepare(_spec);
+    _hissVolumeModule.setRampDurationSeconds(0.02);
+    
     _ramper.setTarget(0.0f, 1.0f, sampleRate * 0.02);
     
     updateParameters();
@@ -246,66 +267,40 @@ bool ViatorrustAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 
 void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    // init buffers
+    _dustBuffer.setSize(buffer.getNumChannels(), buffer.getNumSamples());
+    
     juce::dsp::AudioBlock<float> block {buffer};
+    juce::dsp::AudioBlock<float> dustBlock {_dustBuffer};
+    _lowConstrainFilterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
+    _highConstrainFilterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
     
-//    for (int ch = 0; ch < buffer.getNumChannels(); ch++)
-//    {
-//        auto* channelData = buffer.getWritePointer(ch);
-//
-//        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
-//        {
-//            auto input = channelData[sample];
-//            channelData[sample] = input;
-//        }
-//    }
+    // generate dust
+    synthesizeRandomCrackle(_dustBuffer);
     
-    //synthesizeRandomHiss(buffer);
-    synthesizeRandomCrackle(buffer);
-    distortMidRange(buffer);
-    buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
-}
-
-void ViatorrustAudioProcessor::synthesizeRandomHiss(juce::AudioBuffer<float> &buffer)
-{
-    auto hissSpeed = _treeState.getRawParameterValue(ViatorParameters::hissSpeedID)->load();
-    _hissSpeedFilterModule.setCutoffFrequency(hissSpeed);
+    // apply age
+    distortMidRange(_dustBuffer);
     
-    auto hissVolumeDB = _treeState.getRawParameterValue(ViatorParameters::hissVolumeID)->load();
-    auto hissVolume = juce::Decibels::decibelsToGain(hissVolumeDB);
+    // dust volume
+    _hissVolumeModule.process(juce::dsp::ProcessContextReplacing<float>(dustBlock));
     
-    auto hissTone = _treeState.getRawParameterValue(ViatorParameters::hissToneID)->load();
-    _hissLowpassModule.setCutoffFrequency(hissTone);
-    
-    for (int ch = 0; ch < buffer.getNumChannels(); ch++)
+    // add effects to main signal
+    for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
     {
-        auto* channelData = buffer.getWritePointer(ch);
-        
-        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
-        {
-            auto input = channelData[sample];
-            
-            auto noise = _noise.nextFloat() * 2.0 - 1.0;
-            auto noiseSpeed = _hissSpeedFilterModule.processSample(ch, noise);
-            auto filteredNoise = _hissLowpassModule.processSample(ch, noise);
-            auto filteredInput = _inputLowpassModule.processSample(ch, input);
-            
-            noiseSpeed *= 10.0;
-            noiseSpeed *= noiseSpeed;
-            noiseSpeed *= 20.0;
-            
-            auto hiss = filteredNoise * noiseSpeed + filteredNoise * 0.05;
-            
-            channelData[sample] = hiss * hissVolume + filteredInput;
-        }
+        buffer.addFrom(channel, 0, _dustBuffer, channel, 0, buffer.getNumSamples());
+    }
+    
+    auto isStereo = _treeState.getRawParameterValue(ViatorParameters::modeID)->load();
+    
+    if (isStereo)
+    {
+        buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
     }
 }
 
 void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> &buffer)
 {
-    auto hissSpeed = _treeState.getRawParameterValue(ViatorParameters::hissSpeedID)->load();
-    _hissSpeedFilterModule.setCutoffFrequency(hissSpeed);
-    auto hissTone = _treeState.getRawParameterValue(ViatorParameters::hissToneID)->load();
-    _hissLowpassModule.setCutoffFrequency(hissTone);
+    _hissSpeedFilterModule.setCutoffFrequency(60.0);
     auto driveDB = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
     auto drive = juce::Decibels::decibelsToGain(driveDB);
     
@@ -315,7 +310,6 @@ void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> 
         
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
-            auto input = channelData[sample];
             auto noise = (_noise.nextFloat() * 2.0 - 1.0) * 0.1;
             auto filteredNoise = _hissLowpassModule.processSample(ch, noise);
             auto noiseSpeed = _hissSpeedFilterModule.processSample(ch, filteredNoise);
@@ -342,7 +336,7 @@ void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> 
             
             if (rampedValue < 1.0)
             {
-                auto outNoise = _noiseLowpassModule.processSample(ch, noise) * 0.05;
+                auto outNoise = _noiseLowpassModule.processSample(ch, noise) * 0.01;
                 auto hpNoise = _hissHighpassModule.processSample(ch, signal);
                 auto output = outNoise + hpNoise;
                 channelData[sample] = output;

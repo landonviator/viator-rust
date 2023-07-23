@@ -120,14 +120,17 @@ private:
     juce::dsp::LinkwitzRileyFilter<float> _noiseLowpassModule;
     juce::dsp::LinkwitzRileyFilter<float> _midSeparaterModule;
     juce::dsp::LinkwitzRileyFilter<float> _lowSeparaterModule;
+    juce::dsp::LinkwitzRileyFilter<float> _lowConstrainFilterModule;
+    juce::dsp::LinkwitzRileyFilter<float> _highConstrainFilterModule;
     viator_dsp::SVFilter<float> _humFilterModule;
+    juce::dsp::Gain<float> _hissVolumeModule;
+    juce::AudioBuffer<float> _dustBuffer;
     float modulationFrequency = 5.0f; // Adjust this value to set the modulation frequency
     float phase = 0.0f;
     float phaseIncrement = 0.0f;
     std::atomic<float> _coeffA;
     juce::Time _time;
     juce::Random _noise{_time.getMilliseconds()};
-    void synthesizeRandomHiss(juce::AudioBuffer<float>& buffer);
     void synthesizeRandomCrackle(juce::AudioBuffer<float>& buffer);
     void distortMidRange(juce::AudioBuffer<float>& buffer);
     float rampedValue = 0.0f;
