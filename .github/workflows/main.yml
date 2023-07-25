@@ -111,3 +111,49 @@ jobs:
         with:
           name: Mac-viator-rust-VST3-Artifact
           path: ~/Library/Audio/Plug-Ins/VST3/
+
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: recursive
+
+      - name: Set up VisualStudio
+        uses: microsoft/setup-msbuild@v1.1
+        with:
+          vs-version: "latest"
+
+      - name: Download Pluginval
+        run: |
+          mkdir Pluginval
+          cd Pluginval
+          curl -L "https://github.com/Tracktion/pluginval/releases/latest/download/pluginval_Windows.zip" -o pluginval.zip
+          Expand-Archive -Path pluginval.zip -DestinationPath . -Force
+
+      - name: Build Plugin Windows VST3
+        run: |
+          cd viator-rust/Builds/VisualStudio2022
+          msbuild "viator-rust.sln" /p:Configuration=Release /p:Platform=x64
+
+      - name: Validate Windows VST3
+        run: |
+          Pluginval\pluginval.exe --strictness-level 5 --validate-in-process --verbose --validate viator-rust\Builds\VisualStudio2022\x64\Release\VST3\viator-rust.vst3 || exit 1
+
+      - name: Delete useless Windows files
+        run: |
+          rm -R viator-rust\Builds\VisualStudio2022\x64\Release\VST3\resources.res
+          rm -R viator-rust\Builds\VisualStudio2022\x64\Release\VST3\viator-rust.exp
+          rm -R viator-rust\Builds\VisualStudio2022\x64\Release\VST3\viator-rust.iobj
+          rm -R viator-rust\Builds\VisualStudio2022\x64\Release\VST3\viator-rust.pdb
+          rm -R viator-rust\Builds\VisualStudio2022\x64\Release\VST3\viator-rust.vst3.recipe
+          rm -R viator-rust\Builds\VisualStudio2022\x64\Release\VST3\viator-rust_VST3.log
+          rm -R viator-rust\Builds\VisualStudio2022\x64\Release\VST3\viator-rust_VST3.vcxproj.FileListAbsolute.txt
+
+      - name: Upload Windows VST3
+        uses: actions/upload-artifact@v3
+        with:
+          name: Windows-viator-rust-VST3-Artifact
+          path: viator-rust\Builds\VisualStudio2022\x64\Release\VST3\
