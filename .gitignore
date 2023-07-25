@@ -6,6 +6,8 @@
 *.lo
 *.o
 *.obj
+*.db
+*.iobj
 
 # Precompiled Headers
 *.gch
@@ -30,7 +32,3 @@
 *.exe
 *.out
 *.app
-
-# Builds
-/Release
-/Debug
