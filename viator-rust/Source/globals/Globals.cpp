@@ -15,6 +15,9 @@ extern const juce::String driveName = "Age";
 extern const juce::String hissVolumeID = "hissVolumeID";
 extern const juce::String hissVolumeName = "Dust Volume";
 
-extern const juce::String modeID = "modeID";
-extern const juce::String modeName = "Mono";
+extern const juce::String stereoModeID = "modeID";
+extern const juce::String stereoModeName = "Mono";
+
+extern const juce::String sourceModeID = "sourceModeID";
+extern const juce::String sourceModeName = "Source Track";
 }

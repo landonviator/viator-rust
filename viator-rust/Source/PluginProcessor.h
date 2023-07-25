@@ -103,16 +103,6 @@ private:
     
     // dsp
     juce::dsp::ProcessSpec _spec;
-    juce::dsp::Oscillator<float> _henonOsc;
-    juce::dsp::Oscillator<float> _lfoOsc;
-    double frequency_;
-    double amplitude_;
-    const double a = 1.4;      // Hénon map parameter
-    const double b = 0.3;      // Hénon map parameter
-    double x;                  // current x coordinate
-    double y;
-    double x_;                  // current x coordinate
-    double y_;
     juce::dsp::LinkwitzRileyFilter<float> _hissLowpassModule;
     juce::dsp::LinkwitzRileyFilter<float> _inputLowpassModule;
     juce::dsp::LinkwitzRileyFilter<float> _hissSpeedFilterModule;
@@ -125,20 +115,13 @@ private:
     viator_dsp::SVFilter<float> _humFilterModule;
     juce::dsp::Gain<float> _hissVolumeModule;
     juce::AudioBuffer<float> _dustBuffer;
-    float modulationFrequency = 5.0f; // Adjust this value to set the modulation frequency
-    float phase = 0.0f;
-    float phaseIncrement = 0.0f;
-    std::atomic<float> _coeffA;
+    juce::AudioBuffer<float> silentBuffer;
     juce::Time _time;
     juce::Random _noise{_time.getMilliseconds()};
     void synthesizeRandomCrackle(juce::AudioBuffer<float>& buffer);
     void distortMidRange(juce::AudioBuffer<float>& buffer);
     float rampedValue = 0.0f;
     Ramper _ramper;
-    
-    // Lookup Table
-    int _lookupTableSize;
-    juce::dsp::LookupTableTransform<float> _lookupTable;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ViatorrustAudioProcessor)

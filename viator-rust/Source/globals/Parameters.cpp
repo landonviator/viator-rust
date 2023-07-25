@@ -28,5 +28,8 @@ void ViatorParameters::Params::initSliderParams()
 void ViatorParameters::Params::initButtonParams()
 {
     // mode
-    _buttonParams.push_back({ViatorParameters::modeID, ViatorParameters::modeName, true});
+    _buttonParams.push_back({ViatorParameters::stereoModeID, ViatorParameters::stereoModeName, true});
+    
+    // source
+    _buttonParams.push_back({ViatorParameters::sourceModeID, ViatorParameters::sourceModeName, true});
 }
