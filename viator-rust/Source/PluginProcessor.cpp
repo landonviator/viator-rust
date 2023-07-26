@@ -296,7 +296,7 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     
     if (safeClip)
     {
-        viator_utils::utils::hardClipBlock(block, 0.97);
+        viator_utils::utils::hardClipBlock(block);
     }
 }
 
