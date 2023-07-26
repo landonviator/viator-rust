@@ -26,4 +26,7 @@ extern const juce::String stereoModeName = "Mono";
 
 extern const juce::String sourceModeID = "sourceModeID";
 extern const juce::String sourceModeName = "Source Track";
+
+extern const juce::String safeClipID = "safeClipID";
+extern const juce::String safeClipName = "Safe Clip";
 }

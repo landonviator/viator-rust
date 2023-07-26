@@ -22,7 +22,7 @@ void ViatorParameters::Params::initSliderParams()
     _sliderParams.push_back({ViatorParameters::driveID, ViatorParameters::driveName, 0.0f, 30.0f, 30.0f, skew::kNoSkew, 0.0, type::kFloat});
     _sliderParams.push_back({ViatorParameters::hissVolumeID, ViatorParameters::hissVolumeName, -30.0f, 30.0f, 0.0f, skew::kNoSkew, 0.0, type::kFloat});
     _sliderParams.push_back({ViatorParameters::dustVolumeID, ViatorParameters::dustVolumeName, -30.0f, 30.0f, 0.0f, skew::kNoSkew, 0.0, type::kFloat});
-    _sliderParams.push_back({ViatorParameters::vinylLFOID, ViatorParameters::vinylLFOName, 0.0f, 1.0f, 0.0f, skew::kNoSkew, 0.1, type::kFloat});
+    _sliderParams.push_back({ViatorParameters::vinylLFOID, ViatorParameters::vinylLFOName, 0.0f, 60.0f, 0.0f, skew::kNoSkew, 0.0, type::kFloat});
 }
 
 void ViatorParameters::Params::initButtonParams()
@@ -32,4 +32,6 @@ void ViatorParameters::Params::initButtonParams()
     
     // source
     _buttonParams.push_back({ViatorParameters::sourceModeID, ViatorParameters::sourceModeName, true});
+    
+    _buttonParams.push_back({ViatorParameters::safeClipID, ViatorParameters::safeClipName, true});
 }

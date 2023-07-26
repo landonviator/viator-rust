@@ -27,4 +27,7 @@ extern const juce::String stereoModeName;
 
 extern const juce::String sourceModeID;
 extern const juce::String sourceModeName;
+
+extern const juce::String safeClipID;
+extern const juce::String safeClipName;
 }

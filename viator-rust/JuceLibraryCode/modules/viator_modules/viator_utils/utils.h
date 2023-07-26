@@ -30,9 +30,9 @@ namespace viator_utils
                 
                 for (int sample = 0; sample < block.getNumSamples(); ++sample)
                 {
-                    if (std::abs(data[sample]) >= juce::Decibels::decibelsToGain(-0.1))
+                    if (std::abs(data[sample]) >= 0.97)
                     {
-                        data[sample] = std::copysign(juce::Decibels::decibelsToGain(-0.1), data[sample]);
+                        data[sample] = std::copysign(0.97, data[sample]);
                     }
                 }
             }

@@ -165,10 +165,6 @@ void ViatorrustAudioProcessor::updateParameters()
     // volume
     auto ageCompensation = juce::jmap(cutoff, 0.0f, 30.0f, 0.0f, 6.0f);
     _ageCompensationModule.setGainDecibels(ageCompensation);
-    
-    // lfo
-    auto lfo = _treeState.getRawParameterValue(ViatorParameters::vinylLFOID)->load();
-    _vinylLFO.setFrequency(lfo);
 }
 
 //==============================================================================
@@ -295,6 +291,13 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     {
         buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
     }
+    
+    auto safeClip = _treeState.getRawParameterValue(ViatorParameters::safeClipID)->load();
+    
+    if (safeClip)
+    {
+        viator_utils::utils::hardClipBlock(block);
+    }
 }
 
 void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> &buffer)
@@ -304,6 +307,10 @@ void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> 
     auto hissGain = juce::Decibels::decibelsToGain(hissVolume + 5.0);
     auto dustVolume = _treeState.getRawParameterValue(ViatorParameters::dustVolumeID)->load();
     auto dustGain = juce::Decibels::decibelsToGain(dustVolume - 6.0);
+    
+    // lfo
+    auto lfo = _treeState.getRawParameterValue(ViatorParameters::vinylLFOID)->load();
+    _vinylLFO.setFrequency(_noise.nextFloat() * lfo);
     
     for (int ch = 0; ch < buffer.getNumChannels(); ch++)
     {
