@@ -87,7 +87,7 @@
         <MODULEPATH id="juce_graphics" path="../modules/JUCE/modules"/>
         <MODULEPATH id="juce_gui_basics" path="../modules/JUCE/modules"/>
         <MODULEPATH id="juce_gui_extra" path="../modules/JUCE/modules"/>
-        <MODULEPATH id="viator_modules" path="../modules/JUCE/modules"/>
+        <MODULEPATH id="viator_modules" path="../modules/viatordsp/viator_modules"/>
       </MODULEPATHS>
     </XCODE_MAC>
     <VS2022 targetFolder="Builds/VisualStudio2022">

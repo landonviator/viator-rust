@@ -16,6 +16,11 @@
 #include "viator_dsp/MultiBandProcessor.cpp"
 #include "viator_dsp/BitCrusher.cpp"
 #include "viator_dsp/BrickWallLPF.cpp"
+#include "viator_dsp/Expander.cpp"
+#include "viator_dsp/Tube.cpp"
+#include "viator_dsp/Denoiser.cpp"
+#include "viator_dsp/ModuleBase.cpp"
+#include "viator_dsp/Compressor.cpp"
 
 /** Viator GUI CPP Files*/
 #include "viator_gui/Widgets/Dial.cpp"
@@ -27,6 +32,12 @@
 #include "viator_gui/Widgets/Menu.cpp"
 #include "viator_gui/Widgets/TextButton.cpp"
 #include "viator_gui/Widgets/Tooltip.cpp"
+#include "viator_gui/Widgets/Meter.cpp"
+#include "viator_gui/Widgets/Scope.cpp"
+#include "viator_gui/Widgets/VUMeter.cpp"
+#include "viator_gui/Widgets/LedMeter.cpp"
+#include "viator_gui/Widgets/ImageFader.cpp"
+#include "viator_gui/Widgets/ImageButton.cpp"
 
 /** Viator LAF Headers*/
 #include "viator_gui/LAF/MenuLAF.cpp"
@@ -34,4 +45,5 @@
 #include "viator_gui/LAF/DialLAF.cpp"
 #include "viator_gui/LAF/TextButtonLAF.cpp"
 #include "viator_gui/LAF/SettingsLAF.cpp"
-
+#include "viator_gui/LAF/MeterLAF.cpp"
+#include "viator_gui/LAF/BorderLAF.cpp"
