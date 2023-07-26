@@ -63,8 +63,8 @@
     <ClCompile>
       <Optimization>Disabled</Optimization>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
-      <AdditionalIncludeDirectories>..\..\..\modules\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\modules\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70005;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;JucePlugin_Enable_IAA=0;JucePlugin_Enable_ARA=0;JucePlugin_Name=&quot;Rust&quot;;JucePlugin_Desc=&quot;viator-rust&quot;;JucePlugin_Manufacturer=&quot;Viator DSP&quot;;JucePlugin_ManufacturerWebsite=&quot;www.ViatorDSP.com&quot;;JucePlugin_ManufacturerEmail=&quot;&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x4e6f7661;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=&quot;1.0.0&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=&quot;Fx&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=viatorrustAU;JucePlugin_AUExportPrefixQuoted=&quot;viatorrustAU&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=&quot;Viator DSP: Rust&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JucePlugin_ARAContentTypes=0;JucePlugin_ARATransformationFlags=0;JucePlugin_ARAFactoryID=&quot;com.ViatorDSP.viatorrust.factory&quot;;JucePlugin_ARADocumentArchiveID=&quot;com.ViatorDSP.viatorrust.aradocumentarchive.1.0.0&quot;;JucePlugin_ARACompatibleArchiveIDs=&quot;&quot;;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\modules\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\modules\JUCE\modules;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70005;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_viator_modules=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;JucePlugin_Enable_IAA=0;JucePlugin_Enable_ARA=0;JucePlugin_Name=&quot;Rust&quot;;JucePlugin_Desc=&quot;viator-rust&quot;;JucePlugin_Manufacturer=&quot;Viator DSP&quot;;JucePlugin_ManufacturerWebsite=&quot;www.ViatorDSP.com&quot;;JucePlugin_ManufacturerEmail=&quot;&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x4e6f7661;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=&quot;1.0.0&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=&quot;Fx&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=viatorrustAU;JucePlugin_AUExportPrefixQuoted=&quot;viatorrustAU&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=&quot;Viator DSP: Rust&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JucePlugin_ARAContentTypes=0;JucePlugin_ARATransformationFlags=0;JucePlugin_ARAFactoryID=&quot;com.ViatorDSP.viatorrust.factory&quot;;JucePlugin_ARADocumentArchiveID=&quot;com.ViatorDSP.viatorrust.aradocumentarchive.1.0.0&quot;;JucePlugin_ARACompatibleArchiveIDs=&quot;&quot;;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -77,8 +77,8 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\..\modules\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\modules\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70005;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;JucePlugin_Enable_IAA=0;JucePlugin_Enable_ARA=0;JucePlugin_Name=\&quot;Rust\&quot;;JucePlugin_Desc=\&quot;viator-rust\&quot;;JucePlugin_Manufacturer=\&quot;Viator DSP\&quot;;JucePlugin_ManufacturerWebsite=\&quot;www.ViatorDSP.com\&quot;;JucePlugin_ManufacturerEmail=\&quot;\&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x4e6f7661;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=\&quot;1.0.0\&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=\&quot;Fx\&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=viatorrustAU;JucePlugin_AUExportPrefixQuoted=\&quot;viatorrustAU\&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=\&quot;Viator DSP: Rust\&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JucePlugin_ARAContentTypes=0;JucePlugin_ARATransformationFlags=0;JucePlugin_ARAFactoryID=\&quot;com.ViatorDSP.viatorrust.factory\&quot;;JucePlugin_ARADocumentArchiveID=\&quot;com.ViatorDSP.viatorrust.aradocumentarchive.1.0.0\&quot;;JucePlugin_ARACompatibleArchiveIDs=\&quot;\&quot;;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\modules\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\modules\JUCE\modules;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;DEBUG;_DEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70005;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_viator_modules=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;JucePlugin_Enable_IAA=0;JucePlugin_Enable_ARA=0;JucePlugin_Name=\&quot;Rust\&quot;;JucePlugin_Desc=\&quot;viator-rust\&quot;;JucePlugin_Manufacturer=\&quot;Viator DSP\&quot;;JucePlugin_ManufacturerWebsite=\&quot;www.ViatorDSP.com\&quot;;JucePlugin_ManufacturerEmail=\&quot;\&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x4e6f7661;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=\&quot;1.0.0\&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=\&quot;Fx\&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=viatorrustAU;JucePlugin_AUExportPrefixQuoted=\&quot;viatorrustAU\&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=\&quot;Viator DSP: Rust\&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JucePlugin_ARAContentTypes=0;JucePlugin_ARATransformationFlags=0;JucePlugin_ARAFactoryID=\&quot;com.ViatorDSP.viatorrust.factory\&quot;;JucePlugin_ARADocumentArchiveID=\&quot;com.ViatorDSP.viatorrust.aradocumentarchive.1.0.0\&quot;;JucePlugin_ARACompatibleArchiveIDs=\&quot;\&quot;;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
       <OutputFile>$(OutDir)\viator-rust.lib</OutputFile>
@@ -104,8 +104,8 @@
     </Midl>
     <ClCompile>
       <Optimization>Full</Optimization>
-      <AdditionalIncludeDirectories>..\..\..\modules\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\modules\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70005;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;JucePlugin_Enable_IAA=0;JucePlugin_Enable_ARA=0;JucePlugin_Name=&quot;Rust&quot;;JucePlugin_Desc=&quot;viator-rust&quot;;JucePlugin_Manufacturer=&quot;Viator DSP&quot;;JucePlugin_ManufacturerWebsite=&quot;www.ViatorDSP.com&quot;;JucePlugin_ManufacturerEmail=&quot;&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x4e6f7661;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=&quot;1.0.0&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=&quot;Fx&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=viatorrustAU;JucePlugin_AUExportPrefixQuoted=&quot;viatorrustAU&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=&quot;Viator DSP: Rust&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JucePlugin_ARAContentTypes=0;JucePlugin_ARATransformationFlags=0;JucePlugin_ARAFactoryID=&quot;com.ViatorDSP.viatorrust.factory&quot;;JucePlugin_ARADocumentArchiveID=&quot;com.ViatorDSP.viatorrust.aradocumentarchive.1.0.0&quot;;JucePlugin_ARACompatibleArchiveIDs=&quot;&quot;;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\modules\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\modules\JUCE\modules;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70005;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_viator_modules=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;JucePlugin_Enable_IAA=0;JucePlugin_Enable_ARA=0;JucePlugin_Name=&quot;Rust&quot;;JucePlugin_Desc=&quot;viator-rust&quot;;JucePlugin_Manufacturer=&quot;Viator DSP&quot;;JucePlugin_ManufacturerWebsite=&quot;www.ViatorDSP.com&quot;;JucePlugin_ManufacturerEmail=&quot;&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x4e6f7661;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=&quot;1.0.0&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=&quot;Fx&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=viatorrustAU;JucePlugin_AUExportPrefixQuoted=&quot;viatorrustAU&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=&quot;Viator DSP: Rust&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JucePlugin_ARAContentTypes=0;JucePlugin_ARATransformationFlags=0;JucePlugin_ARAFactoryID=&quot;com.ViatorDSP.viatorrust.factory&quot;;JucePlugin_ARADocumentArchiveID=&quot;com.ViatorDSP.viatorrust.aradocumentarchive.1.0.0&quot;;JucePlugin_ARACompatibleArchiveIDs=&quot;&quot;;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <RuntimeTypeInfo>true</RuntimeTypeInfo>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
@@ -118,8 +118,8 @@
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
-      <AdditionalIncludeDirectories>..\..\..\modules\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\modules\JUCE\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70005;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;JucePlugin_Enable_IAA=0;JucePlugin_Enable_ARA=0;JucePlugin_Name=\&quot;Rust\&quot;;JucePlugin_Desc=\&quot;viator-rust\&quot;;JucePlugin_Manufacturer=\&quot;Viator DSP\&quot;;JucePlugin_ManufacturerWebsite=\&quot;www.ViatorDSP.com\&quot;;JucePlugin_ManufacturerEmail=\&quot;\&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x4e6f7661;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=\&quot;1.0.0\&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=\&quot;Fx\&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=viatorrustAU;JucePlugin_AUExportPrefixQuoted=\&quot;viatorrustAU\&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=\&quot;Viator DSP: Rust\&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JucePlugin_ARAContentTypes=0;JucePlugin_ARATransformationFlags=0;JucePlugin_ARAFactoryID=\&quot;com.ViatorDSP.viatorrust.factory\&quot;;JucePlugin_ARADocumentArchiveID=\&quot;com.ViatorDSP.viatorrust.aradocumentarchive.1.0.0\&quot;;JucePlugin_ARACompatibleArchiveIDs=\&quot;\&quot;;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>..\..\..\modules\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;..\..\JuceLibraryCode;..\..\..\modules\JUCE\modules;..\..\JuceLibraryCode\modules;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x70005;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_viator_modules=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_VST3_CAN_REPLACE_VST2=0;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=0;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_AAX=0;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Build_LV2=0;JucePlugin_Enable_IAA=0;JucePlugin_Enable_ARA=0;JucePlugin_Name=\&quot;Rust\&quot;;JucePlugin_Desc=\&quot;viator-rust\&quot;;JucePlugin_Manufacturer=\&quot;Viator DSP\&quot;;JucePlugin_ManufacturerWebsite=\&quot;www.ViatorDSP.com\&quot;;JucePlugin_ManufacturerEmail=\&quot;\&quot;;JucePlugin_ManufacturerCode=0x4d616e75;JucePlugin_PluginCode=0x4e6f7661;JucePlugin_IsSynth=0;JucePlugin_WantsMidiInput=0;JucePlugin_ProducesMidiOutput=0;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=1.0.0;JucePlugin_VersionCode=0x10000;JucePlugin_VersionString=\&quot;1.0.0\&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategEffect;JucePlugin_Vst3Category=\&quot;Fx\&quot;;JucePlugin_AUMainType='aufx';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=viatorrustAU;JucePlugin_AUExportPrefixQuoted=\&quot;viatorrustAU\&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXIdentifier=com.ViatorDSP.viatorrust;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=0;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757278;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=\&quot;Viator DSP: Rust\&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JucePlugin_ARAContentTypes=0;JucePlugin_ARATransformationFlags=0;JucePlugin_ARAFactoryID=\&quot;com.ViatorDSP.viatorrust.factory\&quot;;JucePlugin_ARADocumentArchiveID=\&quot;com.ViatorDSP.viatorrust.aradocumentarchive.1.0.0\&quot;;JucePlugin_ARACompatibleArchiveIDs=\&quot;\&quot;;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCER_VS2022_78A503E=1;JUCE_APP_VERSION=1.0.0;JUCE_APP_VERSION_HEX=0x10000;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ResourceCompile>
     <Link>
       <OutputFile>$(OutDir)\viator-rust.lib</OutputFile>
@@ -2402,6 +2402,138 @@
     <ClCompile Include="..\..\..\modules\JUCE\modules\juce_gui_extra\juce_gui_extra.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion\BitCrusher.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion\ChaoticMaps.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion\Distortion.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion\Tube.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Dynamics\Compressor.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Dynamics\Denoiser.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Dynamics\Expander.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Filter\BrickWallLPF.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Filter\MultiBandProcessor.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Filter\SVFilter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\BitCrusher.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\BrickWallLPF.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Compressor.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Denoiser.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Expander.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\LFOGenerator.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\ModuleBase.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\MultiBandProcessor.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\SVFilter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Tube.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\BorderLAF.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\DialLAF.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\FaderLAF.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\MenuLAF.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\MeterLAF.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\SettingsLAF.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\TextButtonLAF.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Dial.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Fader.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\FilmStripKnob.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\ImageButton.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\ImageFader.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Label.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\LedMeter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Menu.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Meter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\NumberBox.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Scope.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\StyleSheet.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\TextButton.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Tooltip.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\VUMeter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\modules\viator_modules\viator_modules.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData2.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData3.cpp"/>
@@ -2432,6 +2564,7 @@
       <AdditionalOptions> /bigobj %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_gui_extra.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\include_viator_modules.cpp"/>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Source\globals\Globals.h"/>
@@ -3382,6 +3515,55 @@
     <ClInclude Include="..\..\..\modules\JUCE\modules\juce_gui_extra\misc\juce_WebBrowserComponent.h"/>
     <ClInclude Include="..\..\..\modules\JUCE\modules\juce_gui_extra\native\juce_mac_NSViewFrameWatcher.h"/>
     <ClInclude Include="..\..\..\modules\JUCE\modules\juce_gui_extra\juce_gui_extra.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\Common\Common.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion\BitCrusher.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion\ChaoticMaps.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion\Distortion.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion\Tube.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Dynamics\Compressor.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Dynamics\Denoiser.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Dynamics\Expander.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Filter\BrickWallLPF.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Filter\MultiBandProcessor.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Filter\SVFilter.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\BitCrusher.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\BrickWallLPF.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Compressor.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Denoiser.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Distortion.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Expander.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\LFOGenerator.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\ModuleBase.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\MultiBandProcessor.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\SVFilter.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_dsp\Tube.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\BorderLAF.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\DialLAF.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\FaderLAF.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\MenuLAF.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\MeterLAF.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\SettingsLAF.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\LAF\TextButtonLAF.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Dial.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Fader.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\FilmStripKnob.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\ImageButton.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\ImageFader.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Label.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\LedMeter.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Menu.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Meter.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\NumberBox.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Scope.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\StyleSheet.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\TextButton.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\Tooltip.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_gui\Widgets\VUMeter.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_utils\Colors\Gradient.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_utils\DSP\dsp.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_utils\Window\Window.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_utils\utils.h"/>
+    <ClInclude Include="..\..\JuceLibraryCode\modules\viator_modules\viator_modules.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\BinaryData.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JuceHeader.h"/>
     <ClInclude Include="..\..\JuceLibraryCode\JucePluginDefines.h"/>
