@@ -137,7 +137,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ViatorrustAudioProcessor::cr
     for (int i = 0; i < _parameterMap.getButtonParams().size(); i++)
     {
         auto param = _parameterMap.getButtonParams()[i];
-        params.push_back (std::make_unique<juce::AudioParameterBool>(juce::ParameterID { param._id, 1 }, param._name, false));
+        params.push_back (std::make_unique<juce::AudioParameterBool>(juce::ParameterID { param._id, 1 }, param._name, _parameterMap.getButtonParams()[i]._initial));
     }
     
     return { params.begin(), params.end() };
@@ -162,9 +162,13 @@ void ViatorrustAudioProcessor::updateParameters()
     _lowConstrainFilterModule.setCutoffFrequency(lowCutoff);
     _highConstrainFilterModule.setCutoffFrequency(highCutoff);
     
-    // gain
-    auto hissVolume = _treeState.getRawParameterValue(ViatorParameters::hissVolumeID)->load();
-    _hissVolumeModule.setGainDecibels(hissVolume);
+    // volume
+    auto ageCompensation = juce::jmap(cutoff, 0.0f, 30.0f, 0.0f, 6.0f);
+    _ageCompensationModule.setGainDecibels(ageCompensation);
+    
+    // lfo
+    auto lfo = _treeState.getRawParameterValue(ViatorParameters::vinylLFOID)->load();
+    _vinylLFO.setFrequency(lfo);
 }
 
 //==============================================================================
@@ -206,11 +210,16 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _hissVolumeModule.prepare(_spec);
     _hissVolumeModule.setRampDurationSeconds(0.02);
     
+    _ageCompensationModule.prepare(_spec);
+    _ageCompensationModule.setRampDurationSeconds(0.02);
+    
     _ramper.setTarget(0.0f, 1.0f, sampleRate * 0.02);
     
     silentBuffer.setSize(getTotalNumInputChannels(), samplesPerBlock);
     silentBuffer.clear();
     _dustBuffer.setSize(getTotalNumInputChannels(), samplesPerBlock);
+    
+    _vinylLFO.initialise([this](float x){return std::sin(x);});
     
     updateParameters();
 }
@@ -249,60 +258,52 @@ bool ViatorrustAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 
 void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
-//    juce::dsp::AudioBlock<float> block {buffer};
-//    juce::dsp::AudioBlock<float> dustBlock {_dustBuffer};
-//    _lowConstrainFilterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
-//    _highConstrainFilterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
-//
-//    // generate dust
-//    synthesizeRandomCrackle(_dustBuffer);
-//
-//    // apply age
-//    distortMidRange(_dustBuffer);
-//
-//    // dust volume
-//    _hissVolumeModule.process(juce::dsp::ProcessContextReplacing<float>(dustBlock));
-//
-//    // source
-//    auto sourceTrack = _treeState.getRawParameterValue(ViatorParameters::sourceModeID)->load();
-//
-//    // add effects to main signal
-//    for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
-//    {
-//        if (sourceTrack)
-//        {
-//            buffer.addFrom(channel, 0, _dustBuffer, channel, 0, buffer.getNumSamples());
-//        }
-//
-//        else
-//        {
-//            buffer.copyFrom(channel, 0, _dustBuffer, channel, 0, buffer.getNumSamples());
-//        }
-//    }
-//
-//    // mono vs stereo
-//    auto isStereo = _treeState.getRawParameterValue(ViatorParameters::stereoModeID)->load();
-//
-//    if (isStereo)
-//    {
-//        buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
-//    }
+    juce::dsp::AudioBlock<float> block {buffer};
+    juce::dsp::AudioBlock<float> dustBlock {_dustBuffer};
     
-    for (int ch = 0; ch < buffer.getNumChannels(); ch++)
+    _lowConstrainFilterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
+    _highConstrainFilterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
+    _ageCompensationModule.process(juce::dsp::ProcessContextReplacing<float>(block));
+    
+    // generate dust
+    synthesizeRandomCrackle(_dustBuffer);
+
+    // apply age
+    distortMidRange(_dustBuffer);
+
+    // source
+    auto sourceTrack = _treeState.getRawParameterValue(ViatorParameters::sourceModeID)->load();
+
+    // add effects to main signal
+    for (int channel = 0; channel < buffer.getNumChannels(); ++channel)
     {
-        auto* channelData = buffer.getWritePointer(ch);
-        
-        for (int sample = 0; sample < buffer.getNumSamples(); sample++)
+        if (sourceTrack)
         {
-            auto noise = (_noise.nextFloat() * 2.0 - 1.0) * 0.1;
-            channelData[sample] = noise;
+            buffer.addFrom(channel, 0, _dustBuffer, channel, 0, buffer.getNumSamples());
         }
+
+        else
+        {
+            buffer.copyFrom(channel, 0, _dustBuffer, channel, 0, buffer.getNumSamples());
+        }
+    }
+
+    // mono vs stereo
+    auto isStereo = _treeState.getRawParameterValue(ViatorParameters::stereoModeID)->load();
+
+    if (isStereo)
+    {
+        buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
     }
 }
 
 void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> &buffer)
 {
     _hissSpeedFilterModule.setCutoffFrequency(60.0);
+    auto hissVolume = _treeState.getRawParameterValue(ViatorParameters::hissVolumeID)->load();
+    auto hissGain = juce::Decibels::decibelsToGain(hissVolume + 5.0);
+    auto dustVolume = _treeState.getRawParameterValue(ViatorParameters::dustVolumeID)->load();
+    auto dustGain = juce::Decibels::decibelsToGain(dustVolume - 6.0);
     
     for (int ch = 0; ch < buffer.getNumChannels(); ch++)
     {
@@ -336,10 +337,21 @@ void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> 
             
             if (rampedValue < 1.0)
             {
-                auto outNoise = _noiseLowpassModule.processSample(ch, noise) * 0.01;
-                auto hpNoise = _hissHighpassModule.processSample(ch, signal);
-                auto output = outNoise + hpNoise;
-                channelData[sample] = output;
+                auto hiss = _noiseLowpassModule.processSample(ch, noise) * 0.01;
+                auto dust = _hissHighpassModule.processSample(ch, signal);
+                _vinylLFO.processSample(hiss);
+                
+                if (_vinylLFO.getFrequency() > 0.0)
+                {
+                    auto output = hiss * hissGain * _vinylLFO.processSample(hiss) + dust * dustGain;
+                    channelData[sample] = output;
+                }
+                
+                else
+                {
+                    auto output = hiss * hissGain + dust * dustGain;
+                    channelData[sample] = output;
+                }
             }
         }
     }

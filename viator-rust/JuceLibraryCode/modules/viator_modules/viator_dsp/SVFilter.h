@@ -105,24 +105,27 @@ public:
     /** Process an individual sample */
     SampleType processSample(SampleType input, SampleType ch) noexcept
     {
+        
+        
         const auto z1 = mZ1[ch];
         const auto z2 = mZ2[ch];
-        
-        const float x = input;
-            
-        const double HP = (x - mRCoeff2 * z1 - mGCoeff * z1 - z2) * mInversion;
+                                
+        const double HP = (input - mRCoeff2 * z1 - mGCoeff * z1 - z2) * mInversion;
         const double BP = HP * mGCoeff + z1;
         const double LP = BP * mGCoeff + z2;
         const double UBP = mRCoeff2 * BP;
-        const double BShelf = x + UBP * mGain;
-        const double LS = x + mGain * LP;
-        const double HS = x + mGain * HP;
-            
+        const double BShelf = input + UBP * mGain;
+        const double LS = input + mGain * LP;
+        const double HS = input + mGain * HP;
+                    
+        //Main output code
+        input = BShelf * bsLevel + LS * lsLevel + HS * hsLevel + HP * hpLevel + LP * lpLevel;
+                   
         // unit delay (state variable)
         mZ1[ch] = mGCoeff * HP + BP;
         mZ2[ch] = mGCoeff * BP + LP;
-        
-        return BShelf * bsLevel + LS * lsLevel + HS * hsLevel + HP * hpLevel + LP * lpLevel;
+
+        return input * juce::Decibels::decibelsToGain(_output.getNextValue());
     }
     
     

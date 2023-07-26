@@ -114,8 +114,10 @@ private:
     juce::dsp::LinkwitzRileyFilter<float> _highConstrainFilterModule;
     viator_dsp::SVFilter<float> _humFilterModule;
     juce::dsp::Gain<float> _hissVolumeModule;
+    juce::dsp::Gain<float> _ageCompensationModule;
     juce::AudioBuffer<float> _dustBuffer;
     juce::AudioBuffer<float> silentBuffer;
+    juce::dsp::Oscillator<float> _vinylLFO;
     juce::Time _time;
     juce::Random _noise{_time.getMilliseconds()};
     void synthesizeRandomCrackle(juce::AudioBuffer<float>& buffer);

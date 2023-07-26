@@ -16,6 +16,12 @@ extern const juce::String driveName;
 extern const juce::String hissVolumeID;
 extern const juce::String hissVolumeName;
 
+extern const juce::String dustVolumeID;
+extern const juce::String dustVolumeName;
+
+extern const juce::String vinylLFOID;
+extern const juce::String vinylLFOName;
+
 extern const juce::String stereoModeID;
 extern const juce::String stereoModeName;
 

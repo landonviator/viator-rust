@@ -54,8 +54,6 @@ public:
                                                 numSamples); // [14]
     }
     
-    void updateCutoff(double newCutoff);
-    
 private:
     double _lpfCutoffFrequency;
     float _sampleRate;

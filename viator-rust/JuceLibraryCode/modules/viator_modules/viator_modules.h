@@ -26,11 +26,6 @@
 #include "viator_dsp/MultiBandProcessor.h"
 #include "viator_dsp/BitCrusher.h"
 #include "viator_dsp/BrickWallLPF.h"
-#include "viator_dsp/Expander.h"
-#include "viator_dsp/Tube.h"
-#include "viator_dsp/Denoiser.h"
-#include "viator_dsp/ModuleBase.h"
-#include "viator_dsp/Compressor.h"
 
 /** Viator GUI Headers*/
 #include "viator_gui/Widgets/Dial.h"
@@ -42,12 +37,6 @@
 #include "viator_gui/Widgets/Menu.h"
 #include "viator_gui/Widgets/TextButton.h"
 #include "viator_gui/Widgets/Tooltip.h"
-#include "viator_gui/Widgets/Meter.h"
-#include "viator_gui/Widgets/Scope.h"
-#include "viator_gui/Widgets/VUMeter.h"
-#include "viator_gui/Widgets/LedMeter.h"
-#include "viator_gui/Widgets/ImageFader.h"
-#include "viator_gui/Widgets/ImageButton.h"
 
 /** Viator LAF Headers*/
 #include "viator_gui/LAF/MenuLAF.h"
@@ -55,11 +44,6 @@
 #include "viator_gui/LAF/DialLAF.h"
 #include "viator_gui/LAF/TextButtonLAF.h"
 #include "viator_gui/LAF/SettingsLAF.h"
-#include "viator_gui/LAF/MeterLAF.h"
-#include "viator_gui/LAF/BorderLAF.h"
 
 /** Viator Utils Headers*/
 #include "viator_utils/utils.h"
-#include "viator_utils/Colors/Gradient.h"
-#include "viator_utils/Window/Window.h"
-#include "viator_utils/DSP/dsp.h"

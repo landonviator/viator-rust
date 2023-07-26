@@ -22,7 +22,7 @@ namespace viator_utils
         }
         
         /** Hard clip an audio block */
-        static void hardClipBlock(juce::dsp::AudioBlock<float> &block, float thresh)
+        static void hardClipBlock(juce::dsp::AudioBlock<float> &block)
         {
             for (int ch = 0; ch < block.getNumChannels(); ++ch)
             {
@@ -30,9 +30,9 @@ namespace viator_utils
                 
                 for (int sample = 0; sample < block.getNumSamples(); ++sample)
                 {
-                    if (std::abs(data[sample]) >= juce::Decibels::decibelsToGain(thresh))
+                    if (std::abs(data[sample]) >= juce::Decibels::decibelsToGain(-0.1))
                     {
-                        data[sample] = std::copysign(juce::Decibels::decibelsToGain(thresh), data[sample]);
+                        data[sample] = std::copysign(juce::Decibels::decibelsToGain(-0.1), data[sample]);
                     }
                 }
             }
@@ -163,17 +163,7 @@ namespace viator_utils
             return u.d;
         }
     };
-
-namespace gui_utils
-{
-
-struct Colors
-{
-    static inline juce::Colour _textColor = juce::Colour::fromRGB(161, 168, 181).darker(0.3f);
-};
-
-} // gui utils
-
 }
+
 #endif /* utils_h */
 
