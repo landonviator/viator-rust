@@ -21,7 +21,7 @@ struct SliderParameterData
     
     public:
         juce::String paramID;
-        juce::String name;
+        juce::String paramName;
         float min;
         float max;
         float initial;
@@ -33,9 +33,9 @@ struct SliderParameterData
 struct ButtonParameterData
 {
     public:
-        juce::String _id;
-        juce::String _name;
-        bool _initial;
+        juce::String paramID;
+        juce::String paramName;
+        bool initial;
 };
 
     class Params
@@ -46,6 +46,12 @@ struct ButtonParameterData
         // Get a ref to the param data
         std::vector<ViatorParameters::SliderParameterData>& getSliderParams(){return _sliderParams;};
         std::vector<ViatorParameters::ButtonParameterData>& getButtonParams(){return _buttonParams;};
+        
+        // io attach
+        std::vector<ViatorParameters::SliderParameterData>& getIOSliderParams(){return _ioSliderParams;};
+        
+        // vinyl attach
+        std::vector<ViatorParameters::SliderParameterData>& getVinylSliderParams(){return _vinylSliderParams;};
         
     private:
         // Adds params to the vector
@@ -58,5 +64,10 @@ struct ButtonParameterData
         std::vector<ViatorParameters::SliderParameterData> _sliderParams;
         std::vector<ViatorParameters::ButtonParameterData> _buttonParams;
         
+        // io attach
+        std::vector<ViatorParameters::SliderParameterData> _ioSliderParams;
+        
+        // vinyl attach
+        std::vector<ViatorParameters::SliderParameterData> _vinylSliderParams;
     };
 }

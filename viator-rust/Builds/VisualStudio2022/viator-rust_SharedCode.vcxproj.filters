@@ -2,6 +2,9 @@
 
 <Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
+    <Filter Include="viator-rust\Source\components">
+      <UniqueIdentifier>{46F50C3A-34FE-F13F-BB44-F223833746BE}</UniqueIdentifier>
+    </Filter>
     <Filter Include="viator-rust\Source\globals">
       <UniqueIdentifier>{C02E243B-BE49-CB3B-29BE-8669916920AF}</UniqueIdentifier>
     </Filter>
@@ -611,9 +614,6 @@
     <Filter Include="JUCE Modules\juce_gui_extra">
       <UniqueIdentifier>{A4D76113-9EDC-DA60-D89B-5BACF7F1C426}</UniqueIdentifier>
     </Filter>
-    <Filter Include="JUCE Modules\viator_modules\Common">
-      <UniqueIdentifier>{AF75E4D9-A650-DEE6-F9AC-8605D4387D02}</UniqueIdentifier>
-    </Filter>
     <Filter Include="JUCE Modules\viator_modules\viator_dsp\Distortion">
       <UniqueIdentifier>{B2DB95C8-79E6-4B84-289C-9F37DB2492FD}</UniqueIdentifier>
     </Filter>
@@ -658,6 +658,9 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\components\Header.cpp">
+      <Filter>viator-rust\Source\components</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\globals\Globals.cpp">
       <Filter>viator-rust\Source\globals</Filter>
     </ClCompile>
@@ -3082,43 +3085,16 @@
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\BrickWallLPF.cpp">
       <Filter>JUCE Modules\viator_modules\viator_dsp\Filter</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\FastFilter.cpp">
+      <Filter>JUCE Modules\viator_modules\viator_dsp\Filter</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\MultiBandProcessor.cpp">
       <Filter>JUCE Modules\viator_modules\viator_dsp\Filter</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\SVFilter.cpp">
       <Filter>JUCE Modules\viator_modules\viator_dsp\Filter</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\BitCrusher.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\BrickWallLPF.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Compressor.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Denoiser.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Distortion.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Expander.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\LFOGenerator.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\ModuleBase.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\MultiBandProcessor.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\SVFilter.cpp">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Tube.cpp">
       <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_gui\LAF\BorderLAF.cpp">
@@ -3220,6 +3196,9 @@
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData10.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData11.cpp">
+      <Filter>JUCE Library Code</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp">
       <Filter>JUCE Library Code</Filter>
     </ClCompile>
@@ -3273,6 +3252,9 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\components\Header.h">
+      <Filter>viator-rust\Source\components</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\globals\Globals.h">
       <Filter>viator-rust\Source\globals</Filter>
     </ClInclude>
@@ -6117,9 +6099,6 @@
     <ClInclude Include="..\..\..\modules\JUCE\modules\juce_gui_extra\juce_gui_extra.h">
       <Filter>JUCE Modules\juce_gui_extra</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\Common\Common.h">
-      <Filter>JUCE Modules\viator_modules\Common</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Distortion\BitCrusher.h">
       <Filter>JUCE Modules\viator_modules\viator_dsp\Distortion</Filter>
     </ClInclude>
@@ -6144,43 +6123,16 @@
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\BrickWallLPF.h">
       <Filter>JUCE Modules\viator_modules\viator_dsp\Filter</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\FastFilter.h">
+      <Filter>JUCE Modules\viator_modules\viator_dsp\Filter</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\MultiBandProcessor.h">
       <Filter>JUCE Modules\viator_modules\viator_dsp\Filter</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\SVFilter.h">
       <Filter>JUCE Modules\viator_modules\viator_dsp\Filter</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\BitCrusher.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\BrickWallLPF.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Compressor.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Denoiser.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Distortion.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Expander.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\LFOGenerator.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\ModuleBase.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\MultiBandProcessor.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\SVFilter.h">
-      <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Tube.h">
       <Filter>JUCE Modules\viator_modules\viator_dsp</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_gui\LAF\BorderLAF.h">
@@ -6315,6 +6267,9 @@
       <Filter>viator-rust\Source\assets\knobs</Filter>
     </None>
     <None Include="..\..\Source\assets\knobs\Knob_10.png">
+      <Filter>viator-rust\Source\assets\knobs</Filter>
+    </None>
+    <None Include="..\..\Source\assets\knobs\Knob_mid.png">
       <Filter>viator-rust\Source\assets\knobs</Filter>
     </None>
     <None Include="..\..\Source\assets\vu-meter\back_vu-meter_decore5.png">

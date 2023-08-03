@@ -25,7 +25,7 @@ ViatorrustAudioProcessor::ViatorrustAudioProcessor()
     // buttons
     for (int i = 0; i < _parameterMap.getButtonParams().size(); i++)
     {
-        _treeState.addParameterListener(_parameterMap.getButtonParams()[i]._id, this);
+        _treeState.addParameterListener(_parameterMap.getButtonParams()[i].paramID, this);
     }
 }
 
@@ -40,7 +40,7 @@ ViatorrustAudioProcessor::~ViatorrustAudioProcessor()
     // buttons
     for (int i = 0; i < _parameterMap.getButtonParams().size(); i++)
     {
-        _treeState.removeParameterListener(_parameterMap.getButtonParams()[i]._id, this);
+        _treeState.removeParameterListener(_parameterMap.getButtonParams()[i].paramID, this);
     }
 }
 
@@ -124,12 +124,12 @@ juce::AudioProcessorValueTreeState::ParameterLayout ViatorrustAudioProcessor::cr
                 range.setSkewForCentre(param.center);
             }
 
-            params.push_back (std::make_unique<juce::AudioProcessorValueTreeState::Parameter>(juce::ParameterID { param.paramID, 1 }, param.name, param.name, range, param.initial, valueToTextFunction, textToValueFunction));
+            params.push_back (std::make_unique<juce::AudioProcessorValueTreeState::Parameter>(juce::ParameterID { param.paramID, 1 }, param.paramName, param.paramName, range, param.initial, valueToTextFunction, textToValueFunction));
         }
 
         else
         {
-            params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { param.paramID, 1 }, param.name, param.min, param.max, param.initial));
+            params.push_back (std::make_unique<juce::AudioParameterFloat>(juce::ParameterID { param.paramID, 1 }, param.paramName, param.min, param.max, param.initial));
         }
     }
     
@@ -137,7 +137,7 @@ juce::AudioProcessorValueTreeState::ParameterLayout ViatorrustAudioProcessor::cr
     for (int i = 0; i < _parameterMap.getButtonParams().size(); i++)
     {
         auto param = _parameterMap.getButtonParams()[i];
-        params.push_back (std::make_unique<juce::AudioParameterBool>(juce::ParameterID { param._id, 1 }, param._name, _parameterMap.getButtonParams()[i]._initial));
+        params.push_back (std::make_unique<juce::AudioParameterBool>(juce::ParameterID { param.paramID, 1 }, param.paramName, _parameterMap.getButtonParams()[i].initial));
     }
     
     return { params.begin(), params.end() };
@@ -396,8 +396,8 @@ bool ViatorrustAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* ViatorrustAudioProcessor::createEditor()
 {
-    //return new ViatorrustAudioProcessorEditor (*this);
-    return new juce::GenericAudioProcessorEditor (*this);
+    return new ViatorrustAudioProcessorEditor (*this);
+    //return new juce::GenericAudioProcessorEditor (*this);
 }
 
 //==============================================================================

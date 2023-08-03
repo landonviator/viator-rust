@@ -5,6 +5,10 @@
               pluginName="Rust" cppLanguageStandard="17">
   <MAINGROUP id="reivZA" name="viator-rust">
     <GROUP id="{590D4FF8-B1D5-7AA2-AD3F-D495526EE06F}" name="Source">
+      <GROUP id="{B523EB1E-BA80-7458-76AA-F5CFEC70957B}" name="components">
+        <FILE id="yBKDqY" name="Header.cpp" compile="1" resource="0" file="Source/components/Header.cpp"/>
+        <FILE id="BXQkmf" name="Header.h" compile="0" resource="0" file="Source/components/Header.h"/>
+      </GROUP>
       <GROUP id="{1D249E4D-2CA1-07E8-C28C-822C5A7AB176}" name="globals">
         <FILE id="v4IvSJ" name="Globals.cpp" compile="1" resource="0" file="Source/globals/Globals.cpp"/>
         <FILE id="VVF2J5" name="Globals.h" compile="0" resource="0" file="Source/globals/Globals.h"/>
@@ -32,6 +36,7 @@
           <FILE id="acFhcN" name="Knob_08.png" compile="0" resource="1" file="Source/assets/knobs/Knob_08.png"/>
           <FILE id="eU4kqm" name="Knob_09.png" compile="0" resource="1" file="Source/assets/knobs/Knob_09.png"/>
           <FILE id="Yywj7Z" name="Knob_10.png" compile="0" resource="1" file="Source/assets/knobs/Knob_10.png"/>
+          <FILE id="ljDlAe" name="Knob_mid.png" compile="0" resource="1" file="Source/assets/knobs/Knob_mid.png"/>
         </GROUP>
         <GROUP id="{23C05432-CEF1-6944-B108-96D18F1F5ECF}" name="vu-meter">
           <FILE id="bt96cc" name="back_vu-meter_decore5.png" compile="0" resource="1"

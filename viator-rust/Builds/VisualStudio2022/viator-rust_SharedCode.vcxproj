@@ -139,6 +139,7 @@
     </Bscmake>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Source\components\Header.cpp"/>
     <ClCompile Include="..\..\Source\globals\Globals.cpp"/>
     <ClCompile Include="..\..\Source\globals\Parameters.cpp"/>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
@@ -2426,43 +2427,16 @@
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\BrickWallLPF.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\FastFilter.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\MultiBandProcessor.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\SVFilter.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\BitCrusher.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\BrickWallLPF.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Compressor.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Denoiser.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Distortion.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Expander.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\LFOGenerator.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\ModuleBase.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\MultiBandProcessor.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\SVFilter.cpp">
-      <ExcludedFromBuild>true</ExcludedFromBuild>
-    </ClCompile>
-    <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Tube.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\modules\viatordsp\viator_modules\viator_gui\LAF\BorderLAF.cpp">
@@ -2544,6 +2518,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData8.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData9.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\BinaryData10.cpp"/>
+    <ClCompile Include="..\..\JuceLibraryCode\BinaryData11.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_basics.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_devices.cpp"/>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_formats.cpp"/>
@@ -2567,6 +2542,7 @@
     <ClCompile Include="..\..\JuceLibraryCode\include_viator_modules.cpp"/>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\Source\components\Header.h"/>
     <ClInclude Include="..\..\Source\globals\Globals.h"/>
     <ClInclude Include="..\..\Source\globals\Parameters.h"/>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>
@@ -3515,7 +3491,6 @@
     <ClInclude Include="..\..\..\modules\JUCE\modules\juce_gui_extra\misc\juce_WebBrowserComponent.h"/>
     <ClInclude Include="..\..\..\modules\JUCE\modules\juce_gui_extra\native\juce_mac_NSViewFrameWatcher.h"/>
     <ClInclude Include="..\..\..\modules\JUCE\modules\juce_gui_extra\juce_gui_extra.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\Common\Common.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Distortion\BitCrusher.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Distortion\ChaoticMaps.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Distortion\Distortion.h"/>
@@ -3524,19 +3499,10 @@
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Dynamics\Denoiser.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Dynamics\Expander.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\BrickWallLPF.h"/>
+    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\FastFilter.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\MultiBandProcessor.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Filter\SVFilter.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\BitCrusher.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\BrickWallLPF.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Compressor.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Denoiser.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Distortion.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Expander.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\LFOGenerator.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\ModuleBase.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\MultiBandProcessor.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\SVFilter.h"/>
-    <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_dsp\Tube.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_gui\LAF\BorderLAF.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_gui\LAF\DialLAF.h"/>
     <ClInclude Include="..\..\..\modules\viatordsp\viator_modules\viator_gui\LAF\FaderLAF.h"/>
@@ -3583,6 +3549,7 @@
     <None Include="..\..\Source\assets\knobs\Knob_08.png"/>
     <None Include="..\..\Source\assets\knobs\Knob_09.png"/>
     <None Include="..\..\Source\assets\knobs\Knob_10.png"/>
+    <None Include="..\..\Source\assets\knobs\Knob_mid.png"/>
     <None Include="..\..\Source\assets\vu-meter\back_vu-meter_decore5.png"/>
     <None Include="..\..\Source\assets\vu-meter\scale_vu-meter.png"/>
     <None Include="..\..\Source\assets\vu-meter\scale_vu-meterno_name.png"/>
