@@ -17,12 +17,22 @@ ViatorrustAudioProcessorEditor::ViatorrustAudioProcessorEditor (ViatorrustAudioP
     // buttons
     setButtonProps();
     
+    // vu
+    auto main = juce::ImageCache::getFromMemory(BinaryData::vu_meter_png, BinaryData::vu_meter_pngSize);
+    auto grid = juce::ImageCache::getFromMemory(BinaryData::scale_vumeter_png, BinaryData::scale_vumeter_pngSize);
+    auto bg = juce::ImageCache::getFromMemory(BinaryData::back_vumeter_decore5_png, BinaryData::back_vumeter_decore5_pngSize);
+    _vuMeter.setVUImages(main, grid, bg);
+    addAndMakeVisible(_vuMeter);
+    
+    startTimer(20);
+    
     // window
-    viator_utils::PluginWindow::setPluginWindowSize(0, 0, *this, 1.5, 0.75);
+    viator_utils::PluginWindow::setPluginWindowSize(audioProcessor._width, audioProcessor._height, *this, 1.5, 0.75);
 }
 
 ViatorrustAudioProcessorEditor::~ViatorrustAudioProcessorEditor()
 {
+    stopTimer();
 }
 
 //==============================================================================
@@ -80,6 +90,16 @@ void ViatorrustAudioProcessorEditor::resized()
         btn->setBounds(btnX, btnY, btnWidth, btnWidth);
         btnX += btnWidth;
     }
+    
+    // vu
+    const auto vuX = getWidth() * 0.345;
+    const auto vuY = getHeight() * 0.18;
+    const auto vuWidth = getWidth() * 0.3;
+    const auto vuHeight = getHeight() * 0.3;
+    _vuMeter.setBounds(vuX, vuY, vuWidth, vuHeight);
+    
+    // Save plugin size in value tree
+    savePluginBounds();
 }
 
 void ViatorrustAudioProcessorEditor::setIOSliderProps()
@@ -128,4 +148,17 @@ void ViatorrustAudioProcessorEditor::setButtonProps()
         _buttonAttachments.add(std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor._treeState, params[i].paramID, _buttons[i]->getButton()));
         addAndMakeVisible(*_buttons[i]);
     }
+}
+
+void ViatorrustAudioProcessorEditor::timerCallback()
+{
+    _vuMeter.getVUMeter().setValue(audioProcessor.getCurrentPeakSignal());
+}
+
+void ViatorrustAudioProcessorEditor::savePluginBounds()
+{
+    audioProcessor.variableTree.setProperty("width", getWidth(), nullptr);
+    audioProcessor.variableTree.setProperty("height", getHeight(), nullptr);
+    audioProcessor._width = getWidth();
+    audioProcessor._height = getHeight();
 }

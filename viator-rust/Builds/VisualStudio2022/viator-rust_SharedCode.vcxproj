@@ -3550,6 +3550,7 @@
     <None Include="..\..\Source\assets\knobs\Knob_09.png"/>
     <None Include="..\..\Source\assets\knobs\Knob_10.png"/>
     <None Include="..\..\Source\assets\knobs\Knob_mid.png"/>
+    <None Include="..\..\Source\assets\vu-meter\vintage\VU_meter_back.png"/>
     <None Include="..\..\Source\assets\vu-meter\back_vu-meter_decore5.png"/>
     <None Include="..\..\Source\assets\vu-meter\scale_vu-meter.png"/>
     <None Include="..\..\Source\assets\vu-meter\scale_vu-meterno_name.png"/>

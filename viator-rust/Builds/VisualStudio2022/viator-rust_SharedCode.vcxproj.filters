@@ -17,6 +17,9 @@
     <Filter Include="viator-rust\Source\assets\knobs">
       <UniqueIdentifier>{B56FC691-6500-A297-F465-B15D0E29E781}</UniqueIdentifier>
     </Filter>
+    <Filter Include="viator-rust\Source\assets\vu-meter\vintage">
+      <UniqueIdentifier>{3EA18B7D-F741-0A89-3597-26A74D72596D}</UniqueIdentifier>
+    </Filter>
     <Filter Include="viator-rust\Source\assets\vu-meter">
       <UniqueIdentifier>{0CAAB0B3-3352-2E7C-328A-90FAEB50AB7F}</UniqueIdentifier>
     </Filter>
@@ -6271,6 +6274,9 @@
     </None>
     <None Include="..\..\Source\assets\knobs\Knob_mid.png">
       <Filter>viator-rust\Source\assets\knobs</Filter>
+    </None>
+    <None Include="..\..\Source\assets\vu-meter\vintage\VU_meter_back.png">
+      <Filter>viator-rust\Source\assets\vu-meter\vintage</Filter>
     </None>
     <None Include="..\..\Source\assets\vu-meter\back_vu-meter_decore5.png">
       <Filter>viator-rust\Source\assets\vu-meter</Filter>

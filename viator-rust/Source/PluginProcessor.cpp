@@ -152,19 +152,19 @@ void ViatorrustAudioProcessor::parameterChanged(const juce::String &parameterID,
 void ViatorrustAudioProcessor::updateParameters()
 {
     // filters
-    auto cutoff = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
-    auto lowRrange = juce::NormalisableRange<float>(20.0f, 300.0f, 1.0f);
-    auto highRange = juce::NormalisableRange<float>(3000.0f, 20000.0f, 1.0f);
-    lowRrange.setSkewForCentre(100.0f);
-    highRange.setSkewForCentre(10000.0);
-    auto lowCutoff = juce::jmap(cutoff, 0.0f, 30.0f, lowRrange.start, lowRrange.end);
-    auto highCutoff = juce::jmap(cutoff, 0.0f, 30.0f, highRange.end, highRange.start);
-    _lowConstrainFilterModule.setCutoffFrequency(lowCutoff);
-    _highConstrainFilterModule.setCutoffFrequency(highCutoff);
+    auto rawDrive = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
+    
+    auto reso = juce::jmap(rawDrive, 0.0f, 30.0f, 0.05f, 0.95f);
+    _bpFilterModule.setResonance(reso);
     
     // volume
-    auto ageCompensation = juce::jmap(cutoff, 0.0f, 30.0f, 0.0f, 6.0f);
+    auto ageCompensation = juce::jmap(rawDrive, 0.0f, 30.0f, 0.0f, 6.0f);
     _ageCompensationModule.setGainDecibels(ageCompensation);
+    
+    auto input = _treeState.getRawParameterValue(ViatorParameters::inputID)->load();
+    auto output = _treeState.getRawParameterValue(ViatorParameters::outputID)->load();
+    _inputVolumeModule.setGainDecibels(input);
+    _outputVolumeModule.setGainDecibels(output);
 }
 
 //==============================================================================
@@ -209,6 +209,11 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _ageCompensationModule.prepare(_spec);
     _ageCompensationModule.setRampDurationSeconds(0.02);
     
+    _inputVolumeModule.prepare(_spec);
+    _inputVolumeModule.setRampDurationSeconds(0.02);
+    _outputVolumeModule.prepare(_spec);
+    _outputVolumeModule.setRampDurationSeconds(0.02);
+    
     _ramper.setTarget(0.0f, 1.0f, sampleRate * 0.02);
     
     silentBuffer.setSize(getTotalNumInputChannels(), samplesPerBlock);
@@ -216,6 +221,12 @@ void ViatorrustAudioProcessor::prepareToPlay (double sampleRate, int samplesPerB
     _dustBuffer.setSize(getTotalNumInputChannels(), samplesPerBlock);
     
     _vinylLFO.initialise([this](float x){return std::sin(x);});
+    
+    levelGain.reset(sampleRate, 0.5);
+    
+    _bpFilterModule.prepare(_spec);
+    _bpFilterModule.setType(juce::dsp::StateVariableTPTFilterType::bandpass);
+    _bpFilterModule.setCutoffFrequency(600.0);
     
     updateParameters();
 }
@@ -257,15 +268,10 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     juce::dsp::AudioBlock<float> block {buffer};
     juce::dsp::AudioBlock<float> dustBlock {_dustBuffer};
     
-    _lowConstrainFilterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
-    _highConstrainFilterModule.process(juce::dsp::ProcessContextReplacing<float>(block));
-    _ageCompensationModule.process(juce::dsp::ProcessContextReplacing<float>(block));
+    _inputVolumeModule.process(juce::dsp::ProcessContextReplacing<float>(block));
     
     // generate dust
     synthesizeRandomCrackle(_dustBuffer);
-
-    // apply age
-    distortMidRange(_dustBuffer);
 
     // source
     auto sourceTrack = _treeState.getRawParameterValue(ViatorParameters::sourceModeID)->load();
@@ -284,6 +290,9 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
         }
     }
 
+    // apply age
+    distortMidRange(buffer);
+
     // mono vs stereo
     auto isStereo = _treeState.getRawParameterValue(ViatorParameters::stereoModeID)->load();
 
@@ -291,13 +300,39 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     {
         buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
     }
-    
+
     auto safeClip = _treeState.getRawParameterValue(ViatorParameters::safeClipID)->load();
-    
+
     if (safeClip)
     {
         viator_utils::utils::hardClipBlock(block);
     }
+    
+    _outputVolumeModule.process(juce::dsp::ProcessContextReplacing<float>(block));
+    
+    // get meter value
+    calculatePeakSignal(buffer);
+}
+
+void ViatorrustAudioProcessor::calculatePeakSignal(juce::AudioBuffer<float> &buffer)
+{
+    levelGain.skip(buffer.getNumSamples());
+    peakDB = buffer.getMagnitude(0, 0, buffer.getNumSamples());
+    
+    if (peakDB < levelGain.getCurrentValue())
+    {
+        levelGain.setTargetValue(peakDB);
+    }
+
+    else
+    {
+        levelGain.setCurrentAndTargetValue(peakDB);
+    }
+}
+
+float ViatorrustAudioProcessor::getCurrentPeakSignal()
+{
+    return juce::Decibels::gainToDecibels(levelGain.getNextValue());
 }
 
 void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> &buffer)
@@ -367,6 +402,8 @@ void ViatorrustAudioProcessor::synthesizeRandomCrackle(juce::AudioBuffer<float> 
 void ViatorrustAudioProcessor::distortMidRange(juce::AudioBuffer<float> &buffer)
 {
     auto driveDB = _treeState.getRawParameterValue(ViatorParameters::driveID)->load();
+    auto compensate = juce::jmap(driveDB, 0.0f, 30.0f, 0.0f, -6.0f);
+    auto mix = driveDB / 30.0f;
     auto drive = juce::Decibels::decibelsToGain(driveDB);
     
     for (int ch = 0; ch < buffer.getNumChannels(); ch++)
@@ -376,14 +413,11 @@ void ViatorrustAudioProcessor::distortMidRange(juce::AudioBuffer<float> &buffer)
         for (int sample = 0; sample < buffer.getNumSamples(); sample++)
         {
             auto input = channelData[sample];
-            auto highPassed = _lowSeparaterModule.processSample(ch, input);
-            float midRange;
-            float high;
-            _midSeparaterModule.processSample(ch, highPassed, midRange, high);
+            float midRange = _bpFilterModule.processSample(ch, input);
+            float restRange = input - midRange;
             auto distortedMid = 2.0 / 3.14 * std::atan(midRange * drive);
-            auto compensatedMid = distortedMid * juce::Decibels::decibelsToGain(-driveDB * 0.5);
-            auto output = input - highPassed + compensatedMid + high;
-            channelData[sample] = output;
+            auto compensatedMid = distortedMid * juce::Decibels::decibelsToGain(compensate);
+            channelData[sample] = (1.0 - mix) * restRange + compensatedMid * mix;
         }
     }
 }
@@ -403,6 +437,7 @@ juce::AudioProcessorEditor* ViatorrustAudioProcessor::createEditor()
 //==============================================================================
 void ViatorrustAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
+    _treeState.state.appendChild(variableTree, nullptr);
     juce::MemoryOutputStream stream(destData, false);
     _treeState.state.writeToStream (stream);
 }
@@ -410,9 +445,13 @@ void ViatorrustAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 void ViatorrustAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     auto tree = juce::ValueTree::readFromData (data, size_t(sizeInBytes));
+    variableTree = tree.getChildWithName("Variables");
+    
     if (tree.isValid())
     {
         _treeState.state = tree;
+        _width = variableTree.getProperty("width");
+        _height = variableTree.getProperty("height");
     }
 }
 

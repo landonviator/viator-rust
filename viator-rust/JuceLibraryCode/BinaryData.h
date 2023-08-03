@@ -53,6 +53,9 @@ namespace BinaryData
     extern const char*   Knob_mid_png;
     const int            Knob_mid_pngSize = 7163291;
 
+    extern const char*   VU_meter_back_png;
+    const int            VU_meter_back_pngSize = 190036;
+
     extern const char*   back_vumeter_decore5_png;
     const int            back_vumeter_decore5_pngSize = 102641;
 
@@ -99,7 +102,7 @@ namespace BinaryData
     const int            screen_pngSize = 69252;
 
     // Number of elements in the namedResourceList and originalFileNames arrays.
-    const int namedResourceListSize = 30;
+    const int namedResourceListSize = 31;
 
     // Points to the start of a list of resource names.
     extern const char* namedResourceList[];

@@ -4,10 +4,8 @@
 #include "PluginProcessor.h"
 #include "components/Header.h"
 
-//==============================================================================
-/**
-*/
 class ViatorrustAudioProcessorEditor  : public juce::AudioProcessorEditor
+, private juce::Timer
 {
 public:
     ViatorrustAudioProcessorEditor (ViatorrustAudioProcessor&);
@@ -39,6 +37,14 @@ private:
     juce::OwnedArray<viator_gui::ImageButton> _buttons;
     juce::OwnedArray<juce::AudioProcessorValueTreeState::ButtonAttachment> _buttonAttachments;
     void setButtonProps();
+    
+    // vu
+    viator_gui::VUMeter _vuMeter;
+    
+    // timer
+    void timerCallback() override;
+    
+    void savePluginBounds();
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ViatorrustAudioProcessorEditor)
 };

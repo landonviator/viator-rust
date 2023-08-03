@@ -156,6 +156,7 @@
 		A3532C63459B247191BC4B56 /* BinaryData2.cpp */ /* BinaryData2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryData2.cpp; path = ../../JuceLibraryCode/BinaryData2.cpp; sourceTree = SOURCE_ROOT; };
 		A3627F7719803DDC263A57D2 /* Ver_slider.png */ /* Ver_slider.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Ver_slider.png; path = ../../Source/assets/faders/Ver_slider.png; sourceTree = SOURCE_ROOT; };
 		A3ABFE7A6CC7B7DCBD6CF642 /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		A6E07BD4415CA161EE23640B /* VU_meter_back.png */ /* VU_meter_back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = VU_meter_back.png; path = "../../Source/assets/vu-meter/vintage/VU_meter_back.png"; sourceTree = SOURCE_ROOT; };
 		A89E70BDD93919860DE1D36A /* juce_gui_basics */ /* juce_gui_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_basics; path = ../../../modules/JUCE/modules/juce_gui_basics; sourceTree = SOURCE_ROOT; };
 		AC12E803FD594BAFB8FDF3B1 /* BinaryData11.cpp */ /* BinaryData11.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryData11.cpp; path = ../../JuceLibraryCode/BinaryData11.cpp; sourceTree = SOURCE_ROOT; };
 		AD3FE09E0FFF1C34CDDCD5E6 /* include_juce_audio_plugin_client_Standalone.cpp */ /* include_juce_audio_plugin_client_Standalone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_Standalone.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp; sourceTree = SOURCE_ROOT; };
@@ -370,6 +371,14 @@
 			name = "viator-rust";
 			sourceTree = "<group>";
 		};
+		7FA8D2252EF32F51C14F7AAE /* vintage */ = {
+			isa = PBXGroup;
+			children = (
+				A6E07BD4415CA161EE23640B,
+			);
+			name = vintage;
+			sourceTree = "<group>";
+		};
 		8A06E714CDE4AA3A4E8177F7 /* knobs */ = {
 			isa = PBXGroup;
 			children = (
@@ -411,6 +420,7 @@
 		BE4E3468AD02ECDB7A562F4F /* vu-meter */ = {
 			isa = PBXGroup;
 			children = (
+				7FA8D2252EF32F51C14F7AAE,
 				44E098A5F7A1014B3234F441,
 				B819BCAF0BC2311AD567D65D,
 				202A5E80E76B68080EBF1E57,

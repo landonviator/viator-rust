@@ -90,6 +90,23 @@ public:
     // parameters
     ViatorParameters::Params _parameterMap;
     juce::AudioProcessorValueTreeState _treeState;
+    juce::ValueTree variableTree
+    { "Variables", {},
+        {
+        { "Group", {{ "name", "Vars" }},
+            {
+                { "Parameter", {{ "id", "width" }, { "value", 0.0 }}},
+                { "Parameter", {{ "id", "height" }, { "value", 0.0 }}}
+            }
+        }
+        }
+    };
+    
+    float _width = 0.0f;
+    float _height = 0.0f;
+    
+    void calculatePeakSignal(juce::AudioBuffer<float>& buffer);
+    float getCurrentPeakSignal();
     
 private:
     
@@ -112,9 +129,12 @@ private:
     juce::dsp::LinkwitzRileyFilter<float> _lowSeparaterModule;
     juce::dsp::LinkwitzRileyFilter<float> _lowConstrainFilterModule;
     juce::dsp::LinkwitzRileyFilter<float> _highConstrainFilterModule;
+    juce::dsp::StateVariableTPTFilter<float> _bpFilterModule;
     viator_dsp::SVFilter<float> _humFilterModule;
     juce::dsp::Gain<float> _hissVolumeModule;
     juce::dsp::Gain<float> _ageCompensationModule;
+    juce::dsp::Gain<float> _inputVolumeModule;
+    juce::dsp::Gain<float> _outputVolumeModule;
     juce::AudioBuffer<float> _dustBuffer;
     juce::AudioBuffer<float> silentBuffer;
     juce::dsp::Oscillator<float> _vinylLFO;
@@ -124,6 +144,9 @@ private:
     void distortMidRange(juce::AudioBuffer<float>& buffer);
     float rampedValue = 0.0f;
     Ramper _ramper;
+    
+    juce::SmoothedValue<double> levelGain = -60.0;
+    float peakDB = -60.0;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ViatorrustAudioProcessor)

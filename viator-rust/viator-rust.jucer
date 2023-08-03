@@ -39,6 +39,10 @@
           <FILE id="ljDlAe" name="Knob_mid.png" compile="0" resource="1" file="Source/assets/knobs/Knob_mid.png"/>
         </GROUP>
         <GROUP id="{23C05432-CEF1-6944-B108-96D18F1F5ECF}" name="vu-meter">
+          <GROUP id="{991F23CC-E4A0-B347-92A9-BAB1DAB09730}" name="vintage">
+            <FILE id="VnsfVX" name="VU_meter_back.png" compile="0" resource="1"
+                  file="Source/assets/vu-meter/vintage/VU_meter_back.png"/>
+          </GROUP>
           <FILE id="bt96cc" name="back_vu-meter_decore5.png" compile="0" resource="1"
                 file="Source/assets/vu-meter/back_vu-meter_decore5.png"/>
           <FILE id="mqwxYU" name="scale_vu-meter.png" compile="0" resource="1"
