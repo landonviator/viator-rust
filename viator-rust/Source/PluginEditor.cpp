@@ -72,14 +72,13 @@ void ViatorrustAudioProcessorEditor::resized()
     }
     
     // buttons
-    auto btnX = getWidth() * 0.24;
+    auto btnX = getWidth() * 0.4;
     const auto btnY = getHeight() * 0.83;
     const auto btnWidth  = getWidth() * 0.065;
-    const auto btnPadding = 3.55;
     for (auto& btn : _buttons)
     {
         btn->setBounds(btnX, btnY, btnWidth, btnWidth);
-        btnX += btnWidth * btnPadding;
+        btnX += btnWidth;
     }
 }
 
