@@ -26,6 +26,10 @@ ViatorrustAudioProcessorEditor::ViatorrustAudioProcessorEditor (ViatorrustAudioP
     
     startTimer(20);
     
+    addAndMakeVisible(_tooltipLabel);
+    _tooltipLabel.setJustificationType(juce::Justification::centred);
+    _tooltipLabel.setColour(juce::Label::ColourIds::textColourId, juce::Colours::whitesmoke.withAlpha(0.5f));
+    
     // window
     viator_utils::PluginWindow::setPluginWindowSize(audioProcessor._width, audioProcessor._height, *this, 1.5, 0.75);
 }
@@ -33,6 +37,21 @@ ViatorrustAudioProcessorEditor::ViatorrustAudioProcessorEditor (ViatorrustAudioP
 ViatorrustAudioProcessorEditor::~ViatorrustAudioProcessorEditor()
 {
     stopTimer();
+    
+    for (int i = 0; i < _vinylDials.size(); i++)
+    {
+        _vinylDials[i]->removeMouseListener(this);
+    }
+    
+    for (int i = 0; i < _ioFaders.size(); i++)
+    {
+        _ioFaders[i]->removeMouseListener(this);
+    }
+    
+    for (int i = 0; i < _buttons.size(); i++)
+    {
+        _buttons[i]->getButton().removeMouseListener(this);
+    }
 }
 
 //==============================================================================
@@ -55,6 +74,11 @@ void ViatorrustAudioProcessorEditor::resized()
     const auto headerHeightMult = 0.1;
     const auto headerHeight = getHeight() * headerHeightMult;
     _headerComp.setBounds(0, 0, getWidth(), headerHeight);
+    
+    const auto tooltipX = getWidth() * 0.2;
+    const auto tooltipWidth = getWidth() * 0.75;
+    _tooltipLabel.setBounds(tooltipX, 0, tooltipWidth, headerHeight);
+    _tooltipLabel.setFont(juce::Font("Helvetica", juce::jmax(getWidth() * 0.015, 10.0), juce::Font::FontStyleFlags::bold));
     
     // io
     auto faderX = getWidth() * 0.125;
@@ -115,6 +139,7 @@ void ViatorrustAudioProcessorEditor::setIOSliderProps()
         _ioFaders[i]->setFaderImageAndNumFrames(image, numFrames);
         _ioFaders[i]->setName(params[i].paramName);
         _ioFaders[i]->setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
+        _ioFaders[i]->addMouseListener(this, false);
         addAndMakeVisible(*_ioFaders[i]);
     }
 }
@@ -131,6 +156,7 @@ void ViatorrustAudioProcessorEditor::setVinylDialProps()
         _vinylAttachments.add(std::make_unique<juce::AudioProcessorValueTreeState::SliderAttachment>(audioProcessor._treeState, params[i].paramID, *_vinylDials[i]));
         _vinylDials[i]->setFaderImageAndNumFrames(image, numFrames);
         _vinylDials[i]->setName(params[i].paramName);
+        _vinylDials[i]->addMouseListener(this, false);
         _vinylDials[i]->setSliderStyle(juce::Slider::SliderStyle::RotaryVerticalDrag);
         addAndMakeVisible(*_vinylDials[i]);
     }
@@ -146,6 +172,7 @@ void ViatorrustAudioProcessorEditor::setButtonProps()
     {
         _buttons.add(std::make_unique<viator_gui::ImageButton>(imageOff, imageOn, params[i].paramName, params[i].paramName));
         _buttonAttachments.add(std::make_unique<juce::AudioProcessorValueTreeState::ButtonAttachment>(audioProcessor._treeState, params[i].paramID, _buttons[i]->getButton()));
+        _buttons[i]->getButton().addMouseListener(this, true);
         addAndMakeVisible(*_buttons[i]);
     }
 }
@@ -161,4 +188,58 @@ void ViatorrustAudioProcessorEditor::savePluginBounds()
     audioProcessor.variableTree.setProperty("height", getHeight(), nullptr);
     audioProcessor._width = getWidth();
     audioProcessor._height = getHeight();
+}
+
+void ViatorrustAudioProcessorEditor::mouseEnter(const juce::MouseEvent &event)
+{
+    for (int i = 0; i < _vinylDials.size(); ++i)
+    {
+        if (event.eventComponent == _vinylDials[i])
+        {
+            _tooltipLabel.setText(_vinylDialsTooltips[i], juce::dontSendNotification);
+        }
+    }
+    
+    for (int i = 0; i < _ioFaders.size(); ++i)
+    {
+        if (event.eventComponent == _ioFaders[i])
+        {
+            _tooltipLabel.setText(_ioTooltips[i], juce::dontSendNotification);
+        }
+    }
+    
+    for (int i = 0; i < _buttons.size(); ++i)
+    {
+        if (event.eventComponent == &_buttons[i]->getButton())
+        {
+            _tooltipLabel.setText(_buttonTooltips[i], juce::dontSendNotification);
+        }
+    }
+}
+
+void ViatorrustAudioProcessorEditor::mouseExit(const juce::MouseEvent &event)
+{
+    for (int i = 0; i < _vinylDials.size(); ++i)
+    {
+        if (event.eventComponent == _vinylDials[i])
+        {
+            _tooltipLabel.setText("", juce::dontSendNotification);
+        }
+    }
+    
+    for (int i = 0; i < _ioFaders.size(); ++i)
+    {
+        if (event.eventComponent == _ioFaders[i])
+        {
+            _tooltipLabel.setText("", juce::dontSendNotification);
+        }
+    }
+    
+    for (int i = 0; i < _buttons.size(); ++i)
+    {
+        if (event.eventComponent == &_buttons[i]->getButton())
+        {
+            _tooltipLabel.setText("", juce::dontSendNotification);
+        }
+    }
 }

@@ -3,7 +3,6 @@
 
 Header::Header()
 {
-    
 }
 
 Header::~Header()
