@@ -173,7 +173,7 @@ if not exist &quot;$(OutDir)/viator-rust.vst3\Contents\Resources&quot; mkdir &qu
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\modules\JUCE\modules\juce_audio_plugin_client\VST3\juce_VST3_Wrapper.cpp">
+    <ClCompile Include="..\..\..\modules\JUCE\modules\juce_audio_plugin_client\VST3\juce_VST3ManifestHelper.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\..\modules\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_VST3.cpp">
