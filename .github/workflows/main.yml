@@ -55,7 +55,8 @@ jobs:
       - name: Build Plugin Mac AU & VST3
         run: |
           cd viator-rust/Builds/MacOSX
-          xcodebuild -project "viator-rust.xcodeproj" -scheme "viator-rust - All" -configuration Release
+          xcodebuild -project "viator-rust.xcodeproj" -scheme "viator-rust - AU" -configuration Release
+          xcodebuild -project "viator-rust.xcodeproj" -scheme "viator-rust - VST3" -configuration Release
 
       - name: Validate Mac AU
         run: |
