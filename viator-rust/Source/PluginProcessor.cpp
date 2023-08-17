@@ -265,6 +265,8 @@ bool ViatorrustAudioProcessor::isBusesLayoutSupported (const BusesLayout& layout
 
 void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
+    numChannels.store(buffer.getNumChannels());
+    
     juce::dsp::AudioBlock<float> block {buffer};
     juce::dsp::AudioBlock<float> dustBlock {_dustBuffer};
     
@@ -296,7 +298,7 @@ void ViatorrustAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, j
     // mono vs stereo
     auto isStereo = _treeState.getRawParameterValue(ViatorParameters::stereoModeID)->load();
 
-    if (isStereo)
+    if (isStereo && numChannels.load() == 2)
     {
         buffer.copyFrom(0, 0, buffer, 1, 0, buffer.getNumSamples());
     }

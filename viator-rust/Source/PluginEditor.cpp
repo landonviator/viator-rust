@@ -180,6 +180,16 @@ void ViatorrustAudioProcessorEditor::setButtonProps()
 void ViatorrustAudioProcessorEditor::timerCallback()
 {
     _vuMeter.getVUMeter().setValue(audioProcessor.getCurrentPeakSignal());
+    
+    if (audioProcessor.getNumChannels() < 2)
+    {
+        _buttons[1]->setVisible(false);
+    }
+    
+    else
+    {
+        _buttons[1]->setVisible(true);
+    }
 }
 
 void ViatorrustAudioProcessorEditor::savePluginBounds()

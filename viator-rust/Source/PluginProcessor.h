@@ -107,6 +107,7 @@ public:
     
     void calculatePeakSignal(juce::AudioBuffer<float>& buffer);
     float getCurrentPeakSignal();
+    int getNumChannels(){return numChannels.load();};
     
 private:
     
@@ -147,6 +148,8 @@ private:
     
     juce::SmoothedValue<double> levelGain = -60.0;
     float peakDB = -60.0;
+    
+    std::atomic<int> numChannels = 1;
     
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (ViatorrustAudioProcessor)

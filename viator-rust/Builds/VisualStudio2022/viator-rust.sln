@@ -10,9 +10,12 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "viator-rust - VST3", "viator-rust_VST3.vcxproj", "{242EC4D3-237C-E8DB-18F7-CD5D79083C5B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{BB7D8DE3-B2FB-6A69-89D3-1A389DFF91EA} = {BB7D8DE3-B2FB-6A69-89D3-1A389DFF91EA}
+		{C0D22DFB-6AD4-568E-ADEA-2E0A9A00A645} = {C0D22DFB-6AD4-568E-ADEA-2E0A9A00A645}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "viator-rust - Shared Code", "viator-rust_SharedCode.vcxproj", "{BB7D8DE3-B2FB-6A69-89D3-1A389DFF91EA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "viator-rust - VST3 Manifest Helper", "viator-rust_VST3ManifestHelper.vcxproj", "{C0D22DFB-6AD4-568E-ADEA-2E0A9A00A645}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +35,10 @@ Global
 		{BB7D8DE3-B2FB-6A69-89D3-1A389DFF91EA}.Debug|x64.Build.0 = Debug|x64
 		{BB7D8DE3-B2FB-6A69-89D3-1A389DFF91EA}.Release|x64.ActiveCfg = Release|x64
 		{BB7D8DE3-B2FB-6A69-89D3-1A389DFF91EA}.Release|x64.Build.0 = Release|x64
+		{C0D22DFB-6AD4-568E-ADEA-2E0A9A00A645}.Debug|x64.ActiveCfg = Debug|x64
+		{C0D22DFB-6AD4-568E-ADEA-2E0A9A00A645}.Debug|x64.Build.0 = Debug|x64
+		{C0D22DFB-6AD4-568E-ADEA-2E0A9A00A645}.Release|x64.ActiveCfg = Release|x64
+		{C0D22DFB-6AD4-568E-ADEA-2E0A9A00A645}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
